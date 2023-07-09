@@ -1,5 +1,22 @@
 body {
-  background-color: #FBF6EF;
+  background: whitesmoke;
+}
+a {
+  color: #000000;
+  text-decoration: none;
+  font: 400 20px "Ubuntu Mono", monospace;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  left: 5vw;
+  top: 70px;
+  font: 400 20px "Ubuntu Mono", monospace;
 }
 
 .catalogs {
@@ -9,8 +26,8 @@ body {
   align-items: flex-end;
   justify-content: flex-start;
   position: absolute;
-  right: 100px;
-  top: 91px;
+  right: 5vw;
+  top: 70px;
 }
 .catalog {
   display: flex;
@@ -23,11 +40,12 @@ body {
   justify-content: center;
   flex-shrink: 0;
   position: relative;
+  background: white;
 }
 .catalog-selected {
   display: flex;
   flex-direction: row;
-    color: #4f1598;
+  color: orange;
   text-align: left;
   font: 700 20px "Ubuntu Mono", monospace;
   text-decoration: line-through;
@@ -36,22 +54,15 @@ body {
   justify-content: center;
   flex-shrink: 0;
   position: relative;
-}
-.intro-selected {
-  color: #4f1598;
-  text-align: left;
-  font: 700 20px "Ubuntu Mono", monospace;
-  text-transform: uppercase;
-  text-decoration: line-through;
-  position: relative;
+  background: white;
 }
 .description {
   color: #000000;
-  text-align: left;
-  font: 400 2.5vmin "Ubuntu Mono", monospace;
+  text-align: right;
+  font: 400 20px "Ubuntu Mono", monospace;
   position: relative;
-  left: 15vw;
-  top: 30vh;
+  left: 10vw;
+  top: 25vh;
   width: 18vw;
 }
 .name {
@@ -63,7 +74,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  bottom: -35vh;
+  top: 300px;
 }
 .en {
   display: flex;
