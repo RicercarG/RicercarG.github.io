@@ -207,13 +207,15 @@ a {
 }
 
 .expander-header:hover {
-  background-color: orange;
-  color: white;
+  /*background-color: orange;*/
+  /*color: white;*/
+  color: orange;
 }
 
 .expander-header.nyu:hover {
-  background-color: #57068c;
-  color: white;
+  /*background-color: #57068c;*/
+  /*color: white;*/
+  color: #57068c;
 }
 
 .expander-badge {
