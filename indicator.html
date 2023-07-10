@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* CSS for the scroll indicator */
+    #scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f1f1f1;
+      z-index: 9999;
+    }
+    #scroll-indicator a {
+      display: inline-block;
+      padding: 8px 16px;
+      text-decoration: none;
+      color: #000;
+    }
+    #scroll-indicator a.active {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="scroll-indicator"></div>
+
+  <div id="intro" style="height: 500px; background-color: lightgray">
+    <h1>Intro</h1>
+  </div>
+
+  <div id="background" style="height: 500px; background-color: lightblue">
+    <h1>Background</h1>
+  </div>
+
+  <div id="projects" style="height: 500px; background-color: lightgreen">
+    <h1>Projects</h1>
+  </div>
+
+  <div id="interests" style="height: 500px; background-color: lightpink">
+    <h1>Interests</h1>
+  </div>
+
+  <div id="misc" style="height: 500px; background-color: lightsalmon">
+    <h1>Misc</h1>
+  </div>
+
+  <script>
+    // JavaScript for the scroll indicator
+    window.addEventListener('DOMContentLoaded', function () {
+      var containerIds = ['intro', 'background', 'projects', 'interests', 'misc'];
+      var scrollIndicator = document.getElementById('scroll-indicator');
+
+      // Create the links for each container ID
+      for (var i = 0; i < containerIds.length; i++) {
+        var containerId = containerIds[i];
+        var link = document.createElement('a');
+        link.href = '#' + containerId;
+        link.textContent = containerId;
+        scrollIndicator.appendChild(link);
+      }
+
+      // Add scroll event listener
+      window.addEventListener('scroll', function () {
+        var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Highlight the active link based on the scroll position
+        for (var i = 0; i < containerIds.length; i++) {
+          var container = document.getElementById(containerIds[i]);
+          var link = scrollIndicator.getElementsByTagName('a')[i];
+
+          if (container.offsetTop <= scrollPosition && container.offsetTop + container.offsetHeight > scrollPosition) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

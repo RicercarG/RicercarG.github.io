@@ -1,6 +1,6 @@
 // randomly add decorations to the first page
 window.addEventListener('DOMContentLoaded', () => {
-  const randomItems = document.querySelectorAll('.material-symbols-rounded');
+  const randomItems = document.querySelectorAll('.sticker');
   const container = document.querySelector('.name');
   const containerWidth = container.clientWidth;
   const containerHeight = container.clientHeight;
@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const left = Math.floor(Math.random() * containerWidth); // Random value for left position
     const top = Math.floor(Math.random() * containerHeight); // Random value for top position
 
-    item.style.left = `${left}px`;
+    item.style.left = `${left-400}px`;
     item.style.top = `${top}px`;
   });
 });
@@ -37,9 +37,51 @@ window.onscroll = function() {
 function toggleExpander(expanderId) {
   var content = document.getElementById("expander" + expanderId + "Content");
   content.classList.toggle("show");
-  // if (content.style.display === "none") {
-  //   content.style.display = "block";
-  // } else {
-  //   content.style.display = "none";
-  // }
 }
+
+// JavaScript for the scroll indicator
+// window.addEventListener('DOMContentLoaded', function () {
+//   var containerIds = ['intro', 'background', 'projects'];
+//   var scrollIndicator = document.getElementById('catalogs');
+//
+//   // Create the links for each container ID
+//   for (var i = 0; i < containerIds.length; i++) {
+//     var containerId = containerIds[i];
+//     var link = document.createElement('a');
+//     link.href = '#' + containerId;
+//     link.textContent = containerId;
+//     scrollIndicator.appendChild(link);
+//   }
+
+// Add scroll event listener
+window.addEventListener('scroll', function () {
+  var containerIds = ['intro', 'background', 'projects'];
+  var scrollIndicators = document.getElementsByClassName('catalog');
+  var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+
+  // Highlight the active link based on the scroll position
+  for (var i = 0; i < containerIds.length; i++) {
+    var container = document.getElementById(containerIds[i]);
+    var link = scrollIndicators[i];
+
+    if (container['id'] === 'background' && container.offsetTop <= scrollPosition && container.offsetTop + container.offsetHeight > scrollPosition) {
+      for (var j = 0; j <= scrollIndicators.length; j++) {
+        scrollIndicators[j].classList.add('bg-dark', 'text-light');
+        link.classList.remove('text-light');
+        link.classList.add('active');
+      }
+    } else {
+        link.classList.remove('bg-dark', 'text-light');
+    }
+
+    if (container.offsetTop <= scrollPosition && container.offsetTop + container.offsetHeight > scrollPosition) {
+      link.classList.remove('text-light');
+      link.classList.add('active');
+
+    } else {
+      link.classList.remove('active');
+    }
+
+
+  }
+});
