@@ -9,22 +9,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
     /*p {*/
     /*    font-family: 'Montserrat', sans-serf;*/
     /*}*/
+    h1 {
+        font-family: Montserrat, sans-serif;
+        padding-bottom: 20px
+    }
+
     </style>
 
 </head>
 <body>
+  <button id="scrollToTop" onclick="scrollToTop()">&#8593;</button>
   <div class="box" id="intro">
 
     <div class="logo">
-        <a href="mailto:yg2709@nyu.edu" style="background: white">yg2709@nyu.edu</a>
+        <a href="mailto:yg2709@nyu.edu" style="background: white; text-decoration: none; color: black">yg2709@nyu.edu</a>
     </div>
     <div class="catalogs">
-      <a class="catalog-selected" href="#intro">Intro</a>
+      <a class="catalog catalog-active" href="#intro">Intro</a>
       <a class="catalog" href="#background">Background</a>
       <a class="catalog" href="#projects">Projects</a>
     </div>
@@ -63,43 +69,113 @@
     </div>
   </div>
   <div class="space"></div>
-  <div class="box" style="background: #2b2f32; min-height: 110vh; background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg'); background-size: cover; background-blend-mode: multiply" id="background">
+  <div class="box" style="background: #171718; min-height: 100vh; background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg'); background-size: cover; background-blend-mode: multiply" id="background">
     <div class="logo">
-      <a class="bg-black text-light">Highest Edu: Undergraduate</a>
+      <p class="bg-black text-light">Highest Edu: Undergraduate</p>
     </div>
 
     <div class="catalogs">
       <a class="catalog bg-black text-light" href="#intro">Intro</a>
-      <a class="catalog-selected bg-black" href="#background">Background</a>
+      <a class="catalog catalog-active bg-black" href="#background">Background</a>
       <a class="catalog bg-black text-light" href="#projects">Projects</a>
     </div>
 
       <div class="container text-light" style="padding-top: 100px; padding-bottom: 100px;">
           <p>2021-now</p>
-          <h1 style="padding-bottom: 20px">NYU Shanghai B.S.</h1>
+          <h1>NYU Shanghai B.S.</h1>
           <p>Major: Data Science, AI Constrain</p>
           <p>Cumulative GPA: 3.881/4.000</p>
       </div>
 
       <div class="space"></div>
-      <div class="container text-secondary" style="position: relative; bottom: -300px">
+      <div class="container text-secondary">
           <small>Image Credit: https://www.garethfuller.com/artwork/shanghai</small>
       </div>
   </div>
 
   <div class="box" id="projects">
     <div class="logo">
-      <a>Total: 5</a>
+      <p class="bg-white">Total: 5</p>
     </div>
     <div class="catalogs">
       <a class="catalog bg-white" href="#intro">Intro</a>
       <a class="catalog bg-white" href="#background">Background</a>
-      <a class="catalog-selected bg-white" href="#projects">Projects</a>
+      <a class="catalog catalog-active bg-white" href="#projects">Projects</a>
+    </div>
+
+    <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+      <h1>Research Projects</h1>
+      <div class="expander">
+        <div class="expander-header" onclick="toggleExpander(1)">
+          AR Audio Reactive Visual Effect for Auditorium Performance in Realtime
+          <span class="expander-badge">2022/06-2022/09</span>
+        </div>
+        <div class="expander-content" id="expander1Content">
+          <div class="expander-content-column">
+            <div class="column">
+              <img class="expander-image" style="width: 50vw; position: relative; border-radius: 10px" src="resources/DURF/Poster%20-%20Realtime%20AR%20Performance%20Enhancement.jpg">
+            </div>
+            <div class="column">
+              <video style="width: 100%; position: relative; border-radius: 10px" controls poster="resources/DURF/Just%20Demo%20Cover.png">
+                <source src="resources/DURF/Just%20Demo-720.mov" type="video/mp4">
+              </video>
+
+              <a href="https://shanghai.nyu.edu/academics/undergraduate-research" target="_blank"><h2>Dean's Undergraduate Research Fund (DURF)</h2></a>
+              <p>Made With: Prof. Marcela Godoy, Morui Yu</p>
+              <p>Awarded as: <a href="https://shanghai.nyu.edu/content/undergraduate-research-symposium-and-conferences" target="_blank">Fall 2022 Undergraduate Research Symposium Best Presentation in STEM & Media</a></p>
+              <p>Showcase: <a href="https://shanghai.nyu.edu/academics/undergraduate/nyu-shanghai-reads/past-events/2022-videos">A Collaboration with NYU Shanghai Reads and NYU Shanghai Performance Team</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="expander">
+        <div class="expander-header" onclick="toggleExpander(2)">
+          The Verse NO.1555 - Virtual Campus
+          <span class="expander-badge">2022/09-2023/05</span>
+        </div>
+        <div class="expander-content" id="expander2Content">
+          <div class="expander-content-column">
+            <div class="column" style="flex-basis: 90%;">
+              <iframe src="https://10years.shanghai.nyu.edu/virtual-campus/interact" width="100%" height="500" style="border-radius: 10px; box-shadow: 0 2px 15px rgba(52,52,52,0.2)"></iframe>
+            </div>
+            <div class="column">
+              <h2>Research Assistant of Prof. Ian Zhang</h2>
+            </div>
+          </div>
+<!--          <iframe src="https://10years.shanghai.nyu.edu/virtual-campus/interact" width="100%" height="500" style="border-radius: 10px; box-shadow: 0 2px 15px rgba(52,52,52,0.2)"></iframe>-->
+        </div>
+      </div>
+
+      <div class="expander">
+        <div class="expander-header" onclick="toggleExpander(3)">Personalized Prompt-Model Retrieval for Generative Recommendation</div>
+        <div class="expander-content" id="expander3Content">
+          Content of expander 3
+        </div>
+      </div>
+      <div class="space" style="height: 30px"></div>
+      <h1>Course Projects</h1>
+      <div class="expander">
+        <div class="expander-header nyu" onclick="toggleExpander(4)">Machine Learning - Fine Tuning a Diffusion Model For Doodles Generation</div>
+        <div class="expander-content" id="expander4Content">
+          Content of expander 4
+        </div>
+      </div>
+
+      <div class="expander">
+        <div class="expander-header nyu" onclick="toggleExpander(5)">Database - Air Ticket Reservation System</div>
+        <div class="expander-content" id="expander5Content">
+          Content of expander 5
+        </div>
+      </div>
     </div>
   </div>
 
 
+
   <script src="scripts/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 
 
 </body>
