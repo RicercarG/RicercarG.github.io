@@ -2,15 +2,15 @@
 window.addEventListener('DOMContentLoaded', () => {
   const randomItems = document.querySelectorAll('.sticker');
   const container = document.querySelector('.name');
-  const containerWidth = container.clientWidth;
+  const containerWidth = container.clientWidth - 100;
   const containerHeight = container.clientHeight;
 
   randomItems.forEach(item => {
     const left = Math.floor(Math.random() * containerWidth); // Random value for left position
     const top = Math.floor(Math.random() * containerHeight); // Random value for top position
 
-    item.style.left = `${left-400}px`;
-    item.style.top = `${top}px`;
+    item.style.left = `${left}px`;
+    item.style.top = `${top+250}px`;
   });
 });
 
