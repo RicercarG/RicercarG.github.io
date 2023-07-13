@@ -1,5 +1,5 @@
 body {
-  background: whitesmoke;
+  background: #FBF6EF;
 }
 a {
   color: #726d6d;
@@ -198,26 +198,31 @@ a {
 .expander {
   background-color: white;
   border-radius: 8px;
+  border: 0 solid white;
   margin-bottom: 10px;
-  overflow: clip;
+  /*overflow: hidden;*/
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .expander-header {
   padding: 20px;
   cursor: pointer;
   font-family: "Ubuntu Mono", monospace;
+  font-size: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /*transition: color 0.3s ease;*/
 }
 
-.expander-header:hover {
+.expander:hover .expander-header{
   /*background-color: orange;*/
   /*color: white;*/
   color: orange;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.expander-header.nyu:hover {
+.expander:hover .expander-header.nyu{
   /*background-color: #57068c;*/
   /*color: white;*/
   color: #57068c;
@@ -230,6 +235,7 @@ a {
   color: #fff;
   font-size: 12px;
   border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .expander-badge.nyu {
@@ -244,21 +250,42 @@ a {
 /*}*/
 
 .expander-content {
+  max-height: 0;
   overflow: hidden;
-  padding: 5px 20px 20px;
-  display: none;
+  transition: all 0.5s step-start;
+}
+.expander.show {
+  background-color: #FBF6EF;
+  /*border: 2px solid whitesmoke;*/
+  border-top: 2px solid orange;
+  border-radius: 0;
+  padding-top: 30px;
 }
 
-.expander-content.show {
+.expander.nyu.show {
+  border-top: 2px solid #57068c;
+}
+
+.expander.show .expander-content {
   display: block;
+  position: relative;
+  max-height: 1000px;
+  overflow: visible;
   /*background-color: #FBF6EF;*/
 }
 
+.expander.show .expander-header{
+  font-size: 30px;
+  transition: all 0.3s ease;
+  padding: 0;
+}
 
 .expander-content-column {
   display: flex;
   justify-content: space-between;
-  gap: 40px
+  gap: 40px;
+  /*padding: 5px 20px 20px 20px;*/
+  padding: 20px 0 40px 0;
 }
 
 .expander-content-column .column {

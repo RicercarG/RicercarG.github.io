@@ -34,10 +34,22 @@ window.onscroll = function() {
 
 
 // toggle expander
-function toggleExpander(expanderId) {
-  var content = document.getElementById("expander" + expanderId + "Content");
-  content.classList.toggle("show");
-}
+// function toggleExpander(expanderId) {
+//   var content = document.getElementById("expander" + expanderId + "Content");
+//   content.classList.toggle("show");
+// }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const expanders = document.querySelectorAll('.expander');
+
+  expanders.forEach(function(expander) {
+    const heading = expander.querySelector('.expander-header');
+
+    heading.addEventListener('click', function() {
+      expander.classList.toggle('show');
+    });
+  });
+});
 
 // JavaScript for the scroll indicator
 // window.addEventListener('DOMContentLoaded', function () {
