@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add scroll event listener
 window.addEventListener('scroll', function () {
-  var containerIds = ['intro', 'background', 'projects'];
+  var containerIds = ['intro', 'background', 'projects', 'awards'];
   var scrollIndicators = document.getElementsByClassName('catalog');
   var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 
@@ -76,15 +76,15 @@ window.addEventListener('scroll', function () {
     var container = document.getElementById(containerIds[i]);
     var link = scrollIndicators[i];
 
-    if (container['id'] === 'background' && container.offsetTop <= scrollPosition && container.offsetTop + container.offsetHeight > scrollPosition) {
-      for (var j = 0; j <= scrollIndicators.length; j++) {
-        scrollIndicators[j].classList.add('bg-dark', 'text-light');
-        link.classList.remove('text-light');
-        link.classList.add('active');
-      }
-    } else {
-        link.classList.remove('bg-dark', 'text-light');
-    }
+    // if (container['id'] === 'background' && container.offsetTop <= scrollPosition && container.offsetTop + container.offsetHeight > scrollPosition) {
+    //   for (var j = 0; j <= scrollIndicators.length; j++) {
+    //     scrollIndicators[j].classList.add('bg-dark', 'text-light');
+    //     link.classList.remove('text-light');
+    //     link.classList.add('active');
+    //   }
+    // } else {
+    //     link.classList.remove('bg-dark', 'text-light');
+    // }
 
     if (container.offsetTop <= scrollPosition && container.offsetTop + container.offsetHeight > scrollPosition) {
       link.classList.remove('text-light');

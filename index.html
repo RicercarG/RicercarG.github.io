@@ -24,22 +24,20 @@
 </head>
 <body>
 <!--  <button id="scrollToTop" onclick="scrollToTop()">&#8593;</button>-->
-
+<div class="catalogs">
+  <a class="catalog active" href="#intro">Intro</a>
+  <a class="catalog" href="#background">Background</a>
+  <a class="catalog" href="#projects">Projects</a>
+  <a class="catalog" href="#awards">Awards</a>
+  <a class="catalog" href="#interests">Interests</a>
+  <a class="catalog" href="#gallery">Gallery</a>
+</div>
   <div class="box" id="intro">
 
     <div class="logo">
         <a href="mailto:yg2709@nyu.edu" style="background: white; text-decoration: none; color: black">yg2709@nyu.edu</a>
     </div>
-    <div class="catalogs">
-      <a class="catalog active" href="#intro">Intro</a>
-      <a class="catalog" href="#background">Background</a>
-      <a class="catalog" href="#projects">Projects</a>
-      <a class="catalog" href="#awards">Awards</a>
-      <a class="catalog" href="#interests">Interests</a>
-      <a class="catalog" href="#gallery">Gallery</a>
 
-
-    </div>
 
     <div class="description">
       An under-graduate student from NYU Shanghai.
@@ -84,25 +82,95 @@
     </div>
   </div>
   <div class="space"></div>
-  <div class="box" style="background: #171718; background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg'); background-size: cover; background-blend-mode: multiply" id="background">
+<!--  <div class="box" style="background-color: #171718; background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg'); background-size: cover; background-blend-mode: multiply" id="background">-->
+  <div class="box" style="background-color: #FBF6EF; background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg'); background-size: cover; background-blend-mode: overlay" id="background">
     <div class="logo">
-      <p class="bg-black text-light">Highest Edu: Undergraduate</p>
+      <p>Highest Edu: Undergraduate</p>
     </div>
 
-<!--    <div class="catalogs">-->
-<!--      <a class="catalog bg-black text-light" href="#intro">Intro</a>-->
-<!--      <a class="catalog active bg-black" href="#background">Background</a>-->
-<!--      <a class="catalog bg-black text-light" href="#projects">Projects</a>-->
-<!--    </div>-->
+      <div class="container" style="padding-top: 60px; padding-bottom: 100px;">
+        <div class="expander-content-column">
+          <div class="column" style="flex-basis: 78vw">
+            <div class="expander-content-column" style="gap: 5vw">
+              <div class="infocard" style="height: fit-content; position: sticky; top: 100px">
+                <div class="container" style="height: 20px; width: 80px; border: 3px solid #cecece; border-radius: 10px; margin-bottom: 20px"></div>
+                <div class="container" style="width: 100%; height: 100%; border-radius: 10px; background-color: #ffffff; padding: 20px; text-align: center">
+                  <h2 style="margin-bottom: 20px">About me</h2>
 
-      <div class="container text-light" style="padding-top: 100px; padding-bottom: 100px;">
-          <p>2021-now</p>
-          <h1>NYU Shanghai B.S.</h1>
-          <p>Major: Data Science, AI Constrain</p>
-          <p>Cumulative GPA: 3.881/4.000</p>
+                  <img style="width: 100%; border-radius: 8px; margin-bottom: 30px" src="resources/background/me-anime1.png" alt="...">
+                  <p>I'm Yuanhe Guo, alias Ricercar. I have great interests in art as well as code.</p>
+                </div>
+
+              </div>
+
+              <div class="column">
+                <div class="container">
+                  <h1>Education</h1>
+                  <div class="expander-badge">2018/09-2021/06</div>
+                  <div class="edu-card jdfz text-light">
+                    <h2>High School Affiliated to Shanghai Jiaotong University, Jiading Campus</h2>
+                  </div>
+                  <div class="expander-badge" style="background-color: mediumpurple">2021/09-Present</div>
+                  <div class="edu-card nyu text-light">
+                    <h2>NYU Shanghai B.S.</h2>
+                    <p>Major: Data Science, AI Constrain</p>
+                    <p>Cumulative GPA: 3.881/4.000</p>
+                  </div>
+                </div>
+                <div class="container" style="margin-top: 40px">
+                  <h1>Experience</h1>
+                  <table>
+                    <tr>
+                      <th>Title</th>
+                      <th>Affiliation</th>
+                      <th>Time</th>
+                    </tr>
+                    <tr>
+                      <td class="fw-bold">Core Member of Marketing</td>
+                      <td>NYU Shanghai Youth League</td>
+                      <td><div class="expander-badge">2021/09-2022/05</div></td>
+                    </tr>
+                    <tr>
+                      <td class="fw-bold">English Teaching Volunteer</td>
+                      <td>Stepping Stones</td>
+                      <td><div class="expander-badge">2021/10-2021/12</div></td>
+                    </tr>
+                    <tr>
+                      <td class="fw-bold">Piano Performer</td>
+                      <td>End-of-Semester Piano Concert with Prof. Chen Wei</td>
+                      <td><div class="expander-badge">2021/12/10</div></td>
+                    </tr>
+                    <tr>
+                      <td class="fw-bold">Research Assistant</td>
+                      <td>Prof. Ian Zhang, NYU Shanghai</td>
+                      <td><div class="expander-badge">2022/09-2022/12</div></td>
+                    </tr>
+                    <tr>
+                      <td class="fw-bold">Marking Team Member</td>
+                      <td>TedxNYU Shanghai</td>
+                      <td><div class="expander-badge">2022/09-2023/06</div></td>
+                    </tr>
+                    <tr>
+                      <td class="fw-bold">Piano Performer</td>
+                      <td>Soliloquy, A Musical Meditation through Classic Piano Repertoire - Piano Recital Featuring the Studio of Meiling Chen</td>
+                      <td><div class="expander-badge">2023/05/05</div></td>
+                    </tr>
+                    <tr>
+                      <td class="fw-bold">Research Assistant</td>
+                      <td>Prof. Hongyi Wen, MAPS Lab</td>
+                      <td><div class="expander-badge">2022/12-Present</div></td>
+                    </tr>
+
+
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="space"></div>
+<!--      <div class="space"></div>-->
       <div class="container text-secondary">
           <small>Image Credit: https://www.garethfuller.com/artwork/shanghai</small>
       </div>
@@ -110,7 +178,7 @@
 
   <div class="box" id="projects">
     <div class="logo">
-      <p class="bg-white">Total: 5</p>
+      <a>Total: 5</a>
     </div>
 <!--    <div class="catalogs">-->
 <!--      <a class="catalog bg-white" href="#intro">Intro</a>-->
@@ -118,7 +186,7 @@
 <!--      <a class="catalog active bg-white" href="#projects">Projects</a>-->
 <!--    </div>-->
 
-    <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+    <div class="container" style="padding-top: 60px; padding-bottom: 100px;">
       <div class="description" style="left: 54vw; top: 50px">From earliest to latest.</div>
       <div class="expander-content-column">
         <div class="column" style="flex-basis: 78vw">
@@ -132,7 +200,7 @@
               <div class="expander-content-column">
                 <div class="column">
                   <img class="expander-image" style="width: 100%; position: relative; border-radius: 10px; margin-bottom: 20px" src="resources/DURF/Just%20Demo%20Cover.png" alt="...">
-                  <h2>Dean's Undergraduate Research Fund (<a href="https://shanghai.nyu.edu/academics/undergraduate-research" target="_blank">DURF</a>)</h2>
+                  <p>A summer project funded by Dean's Undergraduate Research Fund (<a href="https://shanghai.nyu.edu/academics/undergraduate-research" target="_blank">DURF</a>)</p>
                   <p>Made With: Prof. Marcela Godoy, Morui Yu</p>
                   <p>Demo Video: <a href="https://drive.google.com/file/d/1cKtoaDsuH1TPGo2BdUVyoCTkrjWZqtKe/view?usp=sharing">Google Drive Link</a></p>
                   <p>Awarded as: <a href="https://shanghai.nyu.edu/content/undergraduate-research-symposium-and-conferences" target="_blank">Fall 2022 Undergraduate Research Symposium Best Presentation in STEM & Media</a></p>
@@ -180,7 +248,7 @@
               <div class="expander-content-column">
                 <div class="column">
                   <p>[course] CSCI-SHU 101 Introduction to Computer Science and Data Science</p>
-                  
+
                 </div>
               </div>
              </div>
@@ -210,7 +278,7 @@
               <div class="expander-content-column">
                 <div class="column">
                   <p>[course] CSCI-SHU 213 Database Systems</p>
-                  <p>[Link] <a href=https://github.com/RicercarG/CSCI-SHU-213-Database-Final-Project">Github</a></p>
+                  <p>[Link] <a href=https://github.com/RicercarG/CSCI-SHU-213-Database-Final-Project>Github</a></p>
                 </div>
               </div>
                 </div>
@@ -218,6 +286,10 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="box" id="awards" style="background-color: white">
+
   </div>
 
 

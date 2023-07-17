@@ -7,14 +7,35 @@ a {
   /*font: 400 20px "Ubuntu Mono", monospace;*/
 }
 
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "Ubuntu Mono", monospace;
+}
+
 /*utilities*/
 .box {
   min-height: 110vh;
+  background-color: #FBF6EF;
 }
 
-.box > * {
-    /*border:1px solid green;*/
+.container {
+  padding: 0;
+  position: relative;
+  max-width: 90vw;
 }
+
+/*.box > * {*/
+/*    border:1px solid green;*/
+/*}*/
+
+/*.container > * {*/
+/*    border:1px solid red;*/
+/*}*/
+
+/*.column > * {*/
+/*    border:1px solid blue;*/
+/*}*/
 
 .material-symbols-rounded {
   position: absolute;
@@ -51,9 +72,6 @@ a {
 }
 
 .logo {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   align-items: flex-start;
   justify-content: flex-start;
   position: relative;
@@ -61,6 +79,9 @@ a {
   top: 70px;
   font: 400 20px "Ubuntu Mono", monospace;
   width: fit-content;
+  background: white;
+  text-decoration: none;
+  color: black
 }
 
 /*catalog*/
@@ -194,6 +215,66 @@ a {
   cursor: pointer;
   }
 
+.infocard {
+  position: relative;
+  width: 35vw;
+  font: 400 16px "Ubuntu Mono", monospace;
+  /*padding: 0 30px 10px 30px;*/
+  padding: 20px;
+  /*border: 20px solid rgba(0, 0, 0, 0.1);*/
+  border-radius: 15px;
+  /*background-color: #282827;*/
+  filter: drop-shadow(0 2px 20px rgba(28, 28, 28, 0.15));
+  background-color: rgba(255, 255, 255, 0.71);
+  /*overflow-y: scroll;*/
+  max-height: 80vh;
+}
+
+/*.infocard.image-blend {*/
+/*  background-color: #171718;*/
+/*  background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg');*/
+/*  background-size: cover;*/
+/*  background-blend-mode: multiply*/
+/*}*/
+
+.edu-card {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  /*border-left: 4px solid white;*/
+  padding: 5px 30px 5px 30px;
+  background: linear-gradient(to right, #3e1d7a 40%, transparent);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.edu-card.nyu {
+  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://dail.shanghai.nyu.edu/sites/default/files/styles/home_page_slideshow/public/2023-03/WechatIMG34.jpeg?itok=I2zPGR_7");
+}
+
+.edu-card.jdfz {
+  background: linear-gradient(to right, #651034 40%, transparent), url("https://jdfx.jdjy.sh.cn/api/thumb/a90b617004e6ffb1d7c405e70b97edea/--0-0.jpg");
+  background-size: cover;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  /*padding: 8px;*/
+  padding: 15px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(148, 148, 148, 0.16);
+  width: fit-content;
+  font-family: "Ubuntu Mono", monospace;
+}
+th {
+  font-family: "Ubuntu Mono", monospace;
+  /*background-color: rgba(148, 148, 148, 0.16);*/
+}
+
+
 /*expander*/
 .expander {
   background-color: white;
@@ -236,6 +317,8 @@ a {
   font-size: 12px;
   border-radius: 4px;
   transition: all 0.3s ease;
+  width: fit-content;
+  font-family: "Ubuntu Mono", monospace;
 }
 
 .expander-badge.nyu {
@@ -289,7 +372,7 @@ a {
 }
 
 .expander-content-column .column {
-  flex-basis: 50%;
+  flex-basis: 100%;
 }
 
 .expander-image {
