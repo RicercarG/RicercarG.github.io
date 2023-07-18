@@ -11,6 +11,8 @@ h2 {
   margin-top: 20px;
   margin-bottom: 20px;
   font-family: "Ubuntu Mono", monospace;
+  font-size: 28px;
+  /*font-weight: bold;*/
 }
 
 /*utilities*/
@@ -385,3 +387,46 @@ th {
     position: relative;
     background: white;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Adjust the number to change the number of columns */
+  grid-gap: 2vw; /* Adjust the gap size between grid cells */
+  padding-bottom: 40px;
+  /*background-color: #8e8e8e;*/
+}
+
+.grid-item {
+  display: flex;
+  gap: 40px;
+  /*padding: 5px 20px 20px 20px;*/
+  padding: 0 0 40px 0;
+  /*background-color: rgba(52, 52, 52, 0.62);*/
+  /*border-bottom: 2px solid burlywood;*/
+  /*filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.2));*/
+  width: 28vw;
+}
+
+.grid-item .img {
+  width: 12vw;
+  height: 16vw;
+  object-fit: cover;
+  filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.2));
+  border: 5px solid ghostwhite;
+  border-radius: 5px;
+  background-color: #3e1d7a;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2vw;
+  display: flex;
+  align-items: center;
+}
+
+.grid-title {
+  display: flex;
+  /*background-color: #0a53be;*/
+  width: 18vw;
+  min-width: 250px;
+}
+
+
