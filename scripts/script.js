@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add scroll event listener
 window.addEventListener('scroll', function () {
-  var containerIds = ['intro', 'background', 'projects', 'awards'];
+  var containerIds = ['intro', 'background', 'projects', 'awards', 'gallery'];
   var scrollIndicators = document.getElementsByClassName('catalog');
   var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 
@@ -93,7 +93,39 @@ window.addEventListener('scroll', function () {
     } else {
       link.classList.remove('active');
     }
-
-
   }
 });
+
+// const swiper = new Swiper('.swiper-container', {
+//   direction: 'vertical',
+//   mousewheel: {},
+//   effect: 'cube',
+//   keyboard: {
+//     enabled: true,
+//     onlyInViewport: false
+//   }
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tabLinks = document.querySelectorAll(".tab-links li a");
+  const tabContents = document.querySelectorAll(".swiper-slide");
+
+  tabLinks.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      // Remove the "active" class from all tab links and tab contents
+      tabLinks.forEach(function (tabLink) {
+        tabLink.parentElement.classList.remove("active");
+      });
+      tabContents.forEach(function (tabContent) {
+        tabContent.classList.remove("active");
+      });
+
+      // Add the "active" class to the clicked tab link and the corresponding tab content
+      const target = this.getAttribute("href");
+      document.querySelector(target).classList.add("active");
+      this.parentElement.classList.add("active");
+    });
+  });
+});
+

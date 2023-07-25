@@ -1,0 +1,33 @@
+/* Style for the tab links */
+.tab-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.tab-links li {
+  margin-right: 10px;
+}
+
+.tab-links li a {
+  text-decoration: none;
+  padding: 8px 12px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+}
+
+.tab-links li.active a {
+  background-color: #ddd;
+}
+
+/* Style for the tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}

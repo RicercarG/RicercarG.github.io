@@ -1,92 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Image Gallery</title>
-    <style>
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .gallery img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            margin: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="gallery.css">
 </head>
 <body>
-    <h1>Image Gallery</h1>
-    <div class="gallery"></div>
+  <div class="tabs">
+    <ul class="tab-links">
+      <li class="active"><a href="#figma">Figma</a></li>
+      <li><a href="#blender">Blender</a></li>
+      <li><a href="#tab3">Tab 3</a></li>
+    </ul>
+    <div class="tab-content active" id="figma">
+      <!-- Content for Tab 1 goes here -->
+      ABC
+    </div>
+    <div class="tab-content" id="blender">
+      <!-- Content for Tab 2 goes here -->
+      DFG
+    </div>
+    <div class="tab-content" id="tab3">
+      <!-- Content for Tab 3 goes here -->
+      SDFSDf
+    </div>
+  </div>
 
-    <script>
-        // Folder path where images are located
-        var folderPath = './resources/images/';
-
-        // Get the gallery container
-        var galleryContainer = document.querySelector('.gallery');
-
-        // Function to load images from folder
-        function loadImages() {
-            // Create an XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-
-            // Define the request URL
-            var url = folderPath;
-
-            // Send the request
-            xhr.open('GET', url, true);
-            xhr.send();
-
-            // Event listener to handle the response
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Parse the response as HTML
-                    var parser = new DOMParser();
-                    var htmlDoc = parser.parseFromString(xhr.responseText, 'text/html');
-
-                    // Get all the <a> tags from the response
-                    var imageLinks = htmlDoc.querySelectorAll('a');
-
-                    // Loop through each <a> tag
-                    for (var i = 0; i < imageLinks.length; i++) {
-                        var imageLink = imageLinks[i];
-
-                        // Check if the link is an image
-                        if (isImageLink(imageLink.href)) {
-                            // Create a new FileReader instance
-                            var reader = new FileReader();
-
-                            // Set the onload event handler for the FileReader
-                            reader.onload = function(event) {
-                                // Create an <img> element
-                                var image = document.createElement('img');
-                                image.src = event.target.result;
-                                image.alt = imageLink.innerText;
-
-                                // Append the image to the gallery container
-                                galleryContainer.appendChild(image);
-                            };
-
-                            // Read the image file
-                            reader.readAsDataURL(new Blob([folderPath + imageLink.href]));
-                        }
-                    }
-                }
-            };
-        }
-
-        // Function to check if a link is an image
-        function isImageLink(link) {
-            var imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-            var extension = link.split('.').pop().toLowerCase();
-            return imageExtensions.includes(extension);
-        }
-
-        // Call the loadImages function
-        loadImages();
-    </script>
+  <script src="gallery.js"></script>
 </body>
 </html>

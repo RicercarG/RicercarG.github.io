@@ -429,4 +429,157 @@ th {
   min-width: 250px;
 }
 
+/* Style for the tab links */
+.tab-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  position: relative;
+}
+
+.tab-links li {
+  margin-right: 10px;
+}
+
+.tab-links li a {
+  /*text-decoration: none;*/
+  /*padding: 8px 12px;*/
+  /*background-color: #f2f2f2;*/
+  /*border: 1px solid #ccc;*/
+  /*border-radius: 4px;*/
+  /*color: #333;*/
+  font-family: "Montserrat", sans-serif;
+  font-size: 1vw;
+  font-weight: 400;
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.tab-links li.active a {
+  font-size: 2.5vw;
+  transition: all 0.3s ease;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+/*!* Style for the tab content *!*/
+/*.tab-content {*/
+/*  display: none;*/
+/*}*/
+
+/*.tab-content.active {*/
+/*  display: block;*/
+/*}*/
+
+
+.swiper-slide {
+  position: relative;
+  text-align: center;
+  /*background: linear-gradient(to right, coral, mediumpurple, deepskyblue, darkseagreen);*/
+  /* Center slide text vertically */
+  display: flex;
+  opacity: 0;
+  max-width: 0;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.swiper-slide.active {
+  /*display: flex;*/
+  max-width: fit-content;
+  opacity: 1;
+  z-index: 30;
+  transition: opacity 0.5s ease;
+}
+
+.container-general {
+  /*padding: 75px 0;*/
+  /*margin: 0 auto;*/
+  margin: 0;
+  width: 100%;
+}
+.container-general .gallery-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 500px;
+  height: 70vh;
+  gap: 10px;
+}
+.container-general .gallery-wrap .item {
+  flex: 1;
+  height: 100%;
+  /*background: linear-gradient(to right, coral, mediumpurple, deepskyblue, darkseagreen);*/
+  background-size: auto 90%;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-color: #232222;
+  /*filter: saturate(-2) contrast(80%);*/
+  transition: all 0.8s ease;
+  border-radius: 15px;
+  border: 5px solid whitesmoke;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.item::-webkit-scrollbar {
+  width: 0;
+}
+
+.container-general .gallery-wrap .item .img {
+  width: auto;
+  height: 90%;
+}
+
+.container-general .gallery-wrap .item .empty {
+  width: auto;
+  height: 90%;
+  background: rgba(0, 0, 0, 0);
+}
+
+.container-general .gallery-wrap .item .caption {
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  min-height: 10%;
+  color: black;
+  background-color: whitesmoke;
+  /*overflow-y: scroll;*/
+  /*overflow-x: hidden;*/
+}
+
+.caption::-webkit-scrollbar {
+  width: 0;
+}
+
+.caption .title {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: small;
+  font-weight: bold;
+}
+
+.caption p {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: small;
+  margin-bottom: 5px;
+}
+
+
+.container-general .gallery-wrap .item:hover {
+  flex: 8;
+}
+
+.wrap-effect .item:hover {
+  box-shadow: 0 14px 80px rgba(34, 35, 58, 0.4);
+}
 
