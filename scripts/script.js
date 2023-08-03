@@ -129,3 +129,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// to open link in new tab
+// Find all anchor tags in the document
+const anchorTags = document.getElementsByTagName('a');
+
+// Loop through each anchor tag and set target="_blank" attribute if it doesn't have the class "catalog"
+for (let i = 0; i < anchorTags.length; i++) {
+    if (!anchorTags[i].classList.contains('catalog')) {
+        anchorTags[i].setAttribute('target', '_blank');
+    }
+}
