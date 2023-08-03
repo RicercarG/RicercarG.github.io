@@ -378,14 +378,18 @@ th {
 }
 
 .expander-image {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    background: white;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  /*box-shadow: 0 2px 15px rgba(52,52,52,0.2);*/
+  /*border: 2px solid rgba(52, 52, 52, 0.2);*/
+  margin-bottom: 30px;
 }
 
 .grid {
