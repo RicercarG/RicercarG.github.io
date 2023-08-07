@@ -45,6 +45,11 @@ h2 {
 .nav {
   background-color: transparent;
   padding: 30px 50px 15px 50px;
+  overflow: auto;
+}
+
+.nav::-webkit-scrollbar {
+  width: 0;
 }
 
 .nav ul {
@@ -147,7 +152,7 @@ h2 {
   padding: 10px;
   bottom: 0;
   /*scale: 0.25;*/
-  width: 12vw;
+  width: 20vh;
   height: auto;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
 }
