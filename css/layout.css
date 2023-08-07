@@ -111,7 +111,7 @@ h2 {
 .section .page {
   display: flex;
   /*flex-direction: row;*/
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 60px;
   /*background-color: white;*/
   /*border: 2px solid black;*/
@@ -126,7 +126,7 @@ h2 {
 }
 
 .column {
-  width: 100%;
+  width: fit-content;
 }
 
 /*.box > * {*/
@@ -258,6 +258,18 @@ h2 {
   /*justify-content: center;*/
   align-items: center;
   box-sizing: border-box;
+}
+
+.infocard .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.infocard .img {
+  width: 80%;
+  border-radius: 8px
 }
 
 .edu-card {
@@ -400,6 +412,10 @@ th {
   flex-basis: 100%;
 }
 
+.expander-content-column .durf {
+  max-width: 500px
+}
+
 .expander-image {
   display: flex;
   flex-direction: row;
@@ -454,17 +470,17 @@ th {
   grid-gap: 40px; /* Adjust the gap size between grid cells */
   padding-bottom: 40px;
   /*background-color: #8e8e8e;*/
+  width: auto;
   /*border: 2px solid black;*/
 }
 
 .grid-item {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   /*padding: 5px 20px 20px 20px;*/
-  padding: 0 0 20px 0;
+  padding: 0 0 30px 0;
   /*background-color: rgba(52, 52, 52, 0.62);*/
   /*border-bottom: 2px solid burlywood;*/
-  /*filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.2));*/
   width: 100%;
   overflow: auto;
 }
@@ -489,7 +505,8 @@ th {
   display: flex;
   /*background-color: #0a53be;*/
   width: 400px;
-  min-width: 250px;
+  box-sizing: border-box;
+  /*min-width: 250px;*/
 }
 
 /* Style for the tab links */
@@ -693,7 +710,7 @@ th {
   .section .page {
     flex-direction: column;
     gap: 0;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .infocard {
@@ -707,6 +724,11 @@ th {
     /*padding: 0;*/
   }
 
+  .expander-content-column .durf {
+    max-width: 100%;
+    width: 100%;
+  }
+
   .grid {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -717,6 +739,24 @@ th {
 
   .grid-title {
     width: 100%;
+  }
+
+  .infocard {
+    max-width: 100%;
+  }
+
+  .infocard .img {
+    width: 40%;
+    max-height: 300px;
+    max-width: 300px;
+  }
+
+  .infocard .content {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    /*justify-content: center;*/
+    /*align-items: center;*/
   }
 }
 
