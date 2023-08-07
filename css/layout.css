@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
 body {
   background: #FBF6EF;
 }
@@ -5,6 +7,17 @@ a {
   color: #726d6d;
   /*text-decoration: none;*/
   /*font: 400 20px "Ubuntu Mono", monospace;*/
+}
+
+p {
+  font-family: "inter", sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+    font-family: Montserrat, sans-serif;
+    font-size: 40px;
+    padding-bottom: 20px
 }
 
 h2 {
@@ -15,16 +28,100 @@ h2 {
   /*font-weight: bold;*/
 }
 
-/*utilities*/
-.box {
-  min-height: 110vh;
-  background-color: #FBF6EF;
+/*HEADER & NAV*/
+
+.header {
+  width: 100%;
+  background: #FBF6EF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  /*For animation dark mode*/
+  transition: .4s;
+  /*border-bottom: 2px solid rgba(0, 0, 0, 0.1);*/
+}
+
+.nav {
+  background-color: transparent;
+  padding: 30px 50px 15px 50px;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Display the list items horizontally */
+  /*justify-content: space-between; !* Center the list items horizontally *!*/
+}
+
+.nav li {
+  font: 400 15px "Ubuntu Mono", monospace;
+  display: flex; /* Use flexbox to align content vertically and horizontally */
+  align-items: center; /* Center the content vertically */
+  margin: 0 5px; /* Add spacing between the list items */
+  color: black;
+  border-radius: 20px; /* Create rounded corners to make it look like a pillow */
+  /*background-color: #555; !* Set the background color for the list items *!*/
+  /*border: 2px solid transparent;*/
+}
+
+.nav li.active {
+  background-color: white;
+  color: orange;
+  filter: drop-shadow(0 2px 15px rgba(105, 105, 105, 0.1));
+  text-decoration: line-through;
+  transition: all 0.3s ease;
+}
+
+.nav li:hover {
+  color: orange;
+  /*text-decoration: none;*/
+  /*background-color: transparent;*/
+  transition: color 0.3s ease-in-out;
+}
+
+
+.nav li:last-child {
+  margin-left: auto; /* Push the fourth li element to the rightmost side */
+}
+
+.nav a {
+  display: block;
+  padding: 5px 15px;
+  text-decoration: none;
+  border-radius: 20px;
+  color: inherit;
+}
+
+.section {
+  display: none;
+  /*padding: 6.5rem 0 1rem;*/
+  padding: 100px 50px 0 50px;
+}
+
+.section.active {
+  display: block;
+  /*width: 100vw;*/
+  /*overflow: hidden;*/
+  /*background-color: white;*/
+  /*border: 2px solid green;*/
+}
+
+.section .page {
+  display: flex;
+  /*flex-direction: row;*/
+  justify-content: space-between;
+  gap: 60px;
+  /*background-color: white;*/
+  /*border: 2px solid black;*/
+  /*width: 100%;*/
 }
 
 .container {
   padding: 0;
   position: relative;
-  max-width: 90vw;
+  box-sizing: border-box;
 }
 
 /*.box > * {*/
@@ -39,19 +136,9 @@ h2 {
 /*    border:1px solid blue;*/
 /*}*/
 
-.material-symbols-rounded {
-  position: absolute;
-  /*background-color: teal;*/
-  color: orange;
-  padding: 10px;
-  scale: 2;
-  z-index: 999;
-  text-shadow: 0 2px 8px rgba(229, 137, 48, 0.45);
-}
-
 .sticker {
   position: absolute;
-  z-index: 999;
+  z-index: 998;
   padding: 10px;
   bottom: 0;
   /*scale: 0.25;*/
@@ -60,64 +147,10 @@ h2 {
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
 }
 
-.random-container {
-  position: relative;
-  width: 500px;
-  height: 500px;
-  border: 1px solid black;
-}
-
 .space {
     margin: 0;
     padding: 0;
     height: 100px;
-}
-
-.logo {
-  align-items: flex-start;
-  justify-content: flex-start;
-  position: relative;
-  left: 5vw;
-  top: 70px;
-  font: 400 20px "Ubuntu Mono", monospace;
-  width: fit-content;
-  background: white;
-  text-decoration: none;
-  color: black
-}
-
-/*catalog*/
-
-.catalogs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-end;
-  justify-content: flex-start;
-  position: fixed;
-  right: 5vw;
-  top: 70px;
-  z-index: 999;
-  /*background-color: rgba(247, 248, 250, 0.3);*/
-  /*backdrop-filter: blur(100px);*/
-}
-.catalog {
-  display: flex;
-  flex-direction: row;
-  color: #000000;
-  text-decoration: none;
-  text-align: left;
-  font: 400 20px "Ubuntu Mono", monospace;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-  background: white;
-}
-.catalog.active {
-  color: orange;
-  text-decoration: line-through;
 }
 
 /*intro*/
@@ -130,20 +163,23 @@ h2 {
   left: 10vw;
   top: 10vw;
   width: 18vw;
+  /*border: 2px solid rebeccapurple;*/
 }
+
 .name {
   display: flex;
   flex-direction: row;
-  gap: 10px;
   align-items: flex-end;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 75vh;
   margin: 25vh 0 0 0;
   position: sticky;
   top: 10vh;
   overflow-x: clip;
+  /*border: 2px solid black;*/
 }
+
 .en {
   display: flex;
   flex-direction: column;
@@ -197,32 +233,13 @@ h2 {
   font: 900 14.5vw "Montserrat", sans-serif;
 }
 
-/*scroll*/
-
-#scrollToTop {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  width: 40px;
-  height: 40px;
-  background-color: #484747;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 24px;
-  line-height: 40px;
-  cursor: pointer;
-  }
-
 .infocard {
-  position: relative;
-  width: 35vw;
+  position: sticky;
+  top: 120px;
+  width: 25vw;
+  max-width: 400px;
   font: 400 16px "Ubuntu Mono", monospace;
-  /*padding: 0 30px 10px 30px;*/
-  padding: 20px;
+  padding: 0 10px 10px 10px;
   /*border: 20px solid rgba(0, 0, 0, 0.1);*/
   border-radius: 15px;
   /*background-color: #282827;*/
@@ -230,24 +247,24 @@ h2 {
   background-color: rgba(255, 255, 255, 0.71);
   /*overflow-y: scroll;*/
   max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  align-items: center;
+  box-sizing: border-box;
 }
-
-/*.infocard.image-blend {*/
-/*  background-color: #171718;*/
-/*  background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg');*/
-/*  background-size: cover;*/
-/*  background-blend-mode: multiply*/
-/*}*/
 
 .edu-card {
   position: relative;
-  width: 100%;
+  max-width: 100%;
   border-radius: 8px;
   /*border-left: 4px solid white;*/
   padding: 5px 30px 5px 30px;
   background: linear-gradient(to right, #3e1d7a 40%, transparent);
   margin-top: 20px;
   margin-bottom: 20px;
+  color: white;
+  font-family: "inter", sans-serif;";
 }
 
 .edu-card.nyu {
@@ -394,7 +411,7 @@ th {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Adjust the number to change the number of columns */
+  grid-template-columns: repeat(3, 1fr); /* Adjust the number to change the number of columns */
   grid-gap: 2vw; /* Adjust the gap size between grid cells */
   padding-bottom: 40px;
   /*background-color: #8e8e8e;*/
@@ -424,6 +441,7 @@ th {
   font-size: 1.2vw;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .grid-title {
@@ -488,21 +506,15 @@ th {
   text-align: center;
   /*background: linear-gradient(to right, coral, mediumpurple, deepskyblue, darkseagreen);*/
   /* Center slide text vertically */
-  display: flex;
-  opacity: 0;
-  max-width: 0;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
-  z-index: 1;
-  transition: all 0.3s ease;
+  display: none;
 }
 
 .swiper-slide.active {
-  /*display: flex;*/
-  max-width: fit-content;
-  opacity: 1;
-  z-index: 30;
+  display: flex;
+  /*max-width: fit-content;*/
+  /*opacity: 1;*/
+  width: 100%;
+  /*z-index: 30;*/
   transition: opacity 0.5s ease;
 }
 
@@ -587,3 +599,49 @@ th {
   box-shadow: 0 14px 80px rgba(34, 35, 58, 0.4);
 }
 
+.gallery {
+  width: 100%;
+  height: 60vh;
+    /*background-color: #232222;*/
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  gap: 5px;
+  margin-bottom: 100px;
+  /*background-color: #000;*/
+  /*border-radius: 10px;*/
+  /*border: 5px solid black;*/
+}
+
+.gallery .item {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+
+.gallery .img {
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.gallery .caption {
+  position: absolute;
+  bottom: 0;
+  /*bottom: 10px;*/
+  /*left: 0;*/
+  width: 90%;
+  padding: 15px;
+  text-align: left;
+  opacity: 0;
+  color: white;
+  /*background-color: rgba(0, 0, 0, 0.5);*/
+}
+
+.gallery .item:hover .caption {
+  opacity: 1;
+}
+
+.gallery .item:hover .img {
+  filter: brightness(0.4);
+  transition: all 0.3s ease;
+}

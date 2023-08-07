@@ -1,0 +1,656 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+body {
+  background: #FBF6EF;
+}
+a {
+  color: #726d6d;
+  /*text-decoration: none;*/
+  /*font: 400 20px "Ubuntu Mono", monospace;*/
+}
+
+h1 {
+    font-family: Montserrat, sans-serif;
+    padding-bottom: 20px
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 28px;
+  /*font-weight: bold;*/
+}
+
+/*HEADER & NAV*/
+
+.header {
+  width: 100%;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  /*For animation dark mode*/
+  transition: .4s;
+}
+
+.nav {
+  background-color: #FBF6EF;
+  padding: 30px 50px;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Display the list items horizontally */
+  /*justify-content: space-between; !* Center the list items horizontally *!*/
+}
+
+.nav li {
+  font: 400 15px "Ubuntu Mono", monospace;
+  display: flex; /* Use flexbox to align content vertically and horizontally */
+  align-items: center; /* Center the content vertically */
+  margin: 0 10px; /* Add spacing between the list items */
+  color: black;
+  border-radius: 20px; /* Create rounded corners to make it look like a pillow */
+  /*background-color: #555; !* Set the background color for the list items *!*/
+}
+
+.nav li.active {
+  background-color: white;
+  color: orange;
+  filter: drop-shadow(0 2px 15px rgba(105, 105, 105, 0.1));
+  text-decoration: line-through;
+}
+
+.nav li:last-child {
+  margin-left: auto; /* Push the fourth li element to the rightmost side */
+}
+
+.nav a {
+  display: block;
+  padding: 5px 15px;
+  text-decoration: none;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  color: inherit;
+}
+
+.nav a:hover {
+  border: 2px solid rgba(105, 105, 105, 0.81);
+}
+
+/*utilities*/
+.box {
+  min-height: 100vh;
+  background-color: #FBF6EF;
+}
+
+.container {
+  padding: 0;
+  position: relative;
+  max-width: 90vw;
+}
+
+/*.box > * {*/
+/*    border:1px solid green;*/
+/*}*/
+
+/*.container > * {*/
+/*    border:1px solid red;*/
+/*}*/
+
+/*.column > * {*/
+/*    border:1px solid blue;*/
+/*}*/
+
+.material-symbols-rounded {
+  position: absolute;
+  /*background-color: teal;*/
+  color: orange;
+  padding: 10px;
+  scale: 2;
+  z-index: 999;
+  text-shadow: 0 2px 8px rgba(229, 137, 48, 0.45);
+}
+
+.sticker {
+  position: absolute;
+  z-index: 999;
+  padding: 10px;
+  bottom: 0;
+  /*scale: 0.25;*/
+  width: 12vw;
+  height: auto;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+}
+
+.random-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+}
+
+.space {
+    margin: 0;
+    padding: 0;
+    height: 100px;
+}
+
+.logo {
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  left: 5vw;
+  top: 70px;
+  font: 400 20px "Ubuntu Mono", monospace;
+  width: fit-content;
+  background: white;
+  text-decoration: none;
+  color: black
+}
+
+/*catalog*/
+
+.catalogs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  position: fixed;
+  right: 5vw;
+  top: 70px;
+  z-index: 999;
+  /*background-color: rgba(247, 248, 250, 0.3);*/
+  /*backdrop-filter: blur(100px);*/
+}
+.catalog {
+  display: flex;
+  flex-direction: row;
+  color: #000000;
+  text-decoration: none;
+  text-align: left;
+  font: 400 20px "Ubuntu Mono", monospace;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  background: white;
+}
+.catalog.active {
+  color: orange;
+  text-decoration: line-through;
+}
+
+/*intro*/
+
+.description {
+  color: #000000;
+  text-align: right;
+  font: 400 20px "Ubuntu Mono", monospace;
+  position: relative;
+  left: 10vw;
+  top: 10vw;
+  width: 18vw;
+}
+.name {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 25vh 0 0 0;
+  position: sticky;
+  top: 10vh;
+  overflow-x: clip;
+}
+.en {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.name-en {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  position: relative;
+}
+.guo {
+  color: #000000;
+  text-align: left;
+  font: 900 16.5vw "Montserrat", sans-serif;
+  position: relative;
+}
+.name-label {
+  color: #000000;
+  text-align: left;
+  font: 900 2vw "Montserrat", sans-serif;
+  position: absolute;
+  left: 3vw;
+  top: 0px;
+}
+.cn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.name-cn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: -0vw 0 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  color: #000000;
+  text-align: left;
+  font: 900 14.5vw "Montserrat", sans-serif;
+}
+
+/*scroll*/
+
+#scrollToTop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background-color: #484747;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 24px;
+  line-height: 40px;
+  cursor: pointer;
+  }
+
+.infocard {
+  position: relative;
+  width: 35vw;
+  font: 400 16px "Ubuntu Mono", monospace;
+  /*padding: 0 30px 10px 30px;*/
+  padding: 20px;
+  /*border: 20px solid rgba(0, 0, 0, 0.1);*/
+  border-radius: 15px;
+  /*background-color: #282827;*/
+  filter: drop-shadow(0 2px 20px rgba(28, 28, 28, 0.15));
+  background-color: rgba(255, 255, 255, 0.71);
+  /*overflow-y: scroll;*/
+  max-height: 80vh;
+}
+
+/*.infocard.image-blend {*/
+/*  background-color: #171718;*/
+/*  background-image: url('https://assets.website-files.com/62824516d06adb0afa00d1eb/62ed07b27616c5ca67b989e0_Fuller-2022-Shanghai-section1.jpg');*/
+/*  background-size: cover;*/
+/*  background-blend-mode: multiply*/
+/*}*/
+
+.edu-card {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  /*border-left: 4px solid white;*/
+  padding: 5px 30px 5px 30px;
+  background: linear-gradient(to right, #3e1d7a 40%, transparent);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.edu-card.nyu {
+  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://dail.shanghai.nyu.edu/sites/default/files/styles/home_page_slideshow/public/2023-03/WechatIMG34.jpeg?itok=I2zPGR_7");
+}
+
+.edu-card.jdfz {
+  background: linear-gradient(to right, #651034 40%, transparent), url("https://jdfx.jdjy.sh.cn/api/thumb/a90b617004e6ffb1d7c405e70b97edea/--0-0.jpg");
+  background-size: cover;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  /*padding: 8px;*/
+  padding: 15px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(148, 148, 148, 0.16);
+  width: fit-content;
+  font-family: "Ubuntu Mono", monospace;
+}
+th {
+  font-family: "Ubuntu Mono", monospace;
+  /*background-color: rgba(148, 148, 148, 0.16);*/
+}
+
+
+/*expander*/
+.expander {
+  background-color: white;
+  border-radius: 8px;
+  border: 0 solid white;
+  margin-bottom: 10px;
+  /*overflow: hidden;*/
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expander-header {
+  padding: 20px;
+  cursor: pointer;
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*transition: color 0.3s ease;*/
+}
+
+.expander:hover .expander-header{
+  /*background-color: orange;*/
+  /*color: white;*/
+  color: orange;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expander:hover .expander-header.nyu{
+  /*background-color: #57068c;*/
+  /*color: white;*/
+  color: #57068c;
+}
+
+.expander-badge {
+  position: relative;
+  padding: 4px 8px;
+  background-color: #555;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  width: fit-content;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.expander-badge.nyu {
+  background-color: mediumpurple;
+}
+
+
+/*.expander-content {*/
+/*  display: none;*/
+/*  padding: 10px;*/
+/*  transition: max-height 0.3s ease;*/
+/*}*/
+
+.expander-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s step-start;
+}
+.expander.show {
+  background-color: #FBF6EF;
+  /*border: 2px solid whitesmoke;*/
+  border-top: 2px solid orange;
+  border-radius: 0;
+  padding-top: 30px;
+}
+
+.expander.nyu.show {
+  border-top: 2px solid #57068c;
+}
+
+.expander.show .expander-content {
+  display: block;
+  position: relative;
+  max-height: 1000px;
+  overflow: visible;
+  /*background-color: #FBF6EF;*/
+}
+
+.expander.show .expander-header{
+  font-size: 30px;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.expander-content-column {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  /*padding: 5px 20px 20px 20px;*/
+  padding: 20px 0 40px 0;
+}
+
+.expander-content-column .column {
+  flex-basis: 100%;
+}
+
+.expander-image {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  /*box-shadow: 0 2px 15px rgba(52,52,52,0.2);*/
+  /*border: 2px solid rgba(52, 52, 52, 0.2);*/
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Adjust the number to change the number of columns */
+  grid-gap: 2vw; /* Adjust the gap size between grid cells */
+  padding-bottom: 40px;
+  /*background-color: #8e8e8e;*/
+}
+
+.grid-item {
+  display: flex;
+  gap: 40px;
+  /*padding: 5px 20px 20px 20px;*/
+  padding: 0 0 40px 0;
+  /*background-color: rgba(52, 52, 52, 0.62);*/
+  /*border-bottom: 2px solid burlywood;*/
+  /*filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.2));*/
+  width: 28vw;
+}
+
+.grid-item .img {
+  width: 12vw;
+  height: 16vw;
+  object-fit: cover;
+  filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.2));
+  border: 5px solid ghostwhite;
+  border-radius: 5px;
+  background-color: #3e1d7a;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2vw;
+  display: flex;
+  align-items: center;
+}
+
+.grid-title {
+  display: flex;
+  /*background-color: #0a53be;*/
+  width: 18vw;
+  min-width: 250px;
+}
+
+/* Style for the tab links */
+.tab-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  position: relative;
+}
+
+.tab-links li {
+  margin-right: 10px;
+}
+
+.tab-links li a {
+  /*text-decoration: none;*/
+  /*padding: 8px 12px;*/
+  /*background-color: #f2f2f2;*/
+  /*border: 1px solid #ccc;*/
+  /*border-radius: 4px;*/
+  /*color: #333;*/
+  font-family: "Montserrat", sans-serif;
+  font-size: 1vw;
+  font-weight: 400;
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.tab-links li.active a {
+  font-size: 2.5vw;
+  transition: all 0.3s ease;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+/*!* Style for the tab content *!*/
+/*.tab-content {*/
+/*  display: none;*/
+/*}*/
+
+/*.tab-content.active {*/
+/*  display: block;*/
+/*}*/
+
+
+.swiper-slide {
+  position: relative;
+  text-align: center;
+  /*background: linear-gradient(to right, coral, mediumpurple, deepskyblue, darkseagreen);*/
+  /* Center slide text vertically */
+  display: flex;
+  opacity: 0;
+  max-width: 0;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.swiper-slide.active {
+  /*display: flex;*/
+  max-width: fit-content;
+  opacity: 1;
+  z-index: 30;
+  transition: opacity 0.5s ease;
+}
+
+.container-general {
+  /*padding: 75px 0;*/
+  /*margin: 0 auto;*/
+  margin: 0;
+  width: 100%;
+}
+.container-general .gallery-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 500px;
+  height: 70vh;
+  gap: 10px;
+}
+.container-general .gallery-wrap .item {
+  flex: 1;
+  height: 100%;
+  /*background: linear-gradient(to right, coral, mediumpurple, deepskyblue, darkseagreen);*/
+  background-size: auto 90%;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-color: #232222;
+  /*filter: saturate(-2) contrast(80%);*/
+  transition: all 0.8s ease;
+  border-radius: 15px;
+  border: 5px solid whitesmoke;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.item::-webkit-scrollbar {
+  width: 0;
+}
+
+.container-general .gallery-wrap .item .img {
+  width: auto;
+  height: 90%;
+}
+
+.container-general .gallery-wrap .item .empty {
+  width: auto;
+  height: 90%;
+  background: rgba(0, 0, 0, 0);
+}
+
+.container-general .gallery-wrap .item .caption {
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  min-height: 10%;
+  color: black;
+  background-color: whitesmoke;
+  /*overflow-y: scroll;*/
+  /*overflow-x: hidden;*/
+}
+
+.caption::-webkit-scrollbar {
+  width: 0;
+}
+
+.caption .title {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: small;
+  font-weight: bold;
+}
+
+.caption p {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: small;
+  margin-bottom: 5px;
+}
+
+
+.container-general .gallery-wrap .item:hover {
+  flex: 8;
+}
+
+.wrap-effect .item:hover {
+  box-shadow: 0 14px 80px rgba(34, 35, 58, 0.4);
+}
+
