@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <div class="page-container">
   <header class="header" id="header">
     <nav class="nav" id="nav">
       <ul>
@@ -149,7 +150,7 @@
           </div>
           <div class="expander-content">
             <div class="expander-content-column">
-              <div class="column">
+              <div class="column" style="max-width: 500px">
 
                 <iframe class="expander-image" width="100%" height="250vw" style="position: relative; border-radius: 10px; margin-bottom: 20px" src="https://www.youtube.com/embed/6cDXOyWx7LU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -164,7 +165,7 @@
                 </p>
               </div>
               <div class="column">
-                <img class="expander-image" style="width: 50vw; position: relative" src="resources/Projects/DURF/Poster%20-%20Realtime%20AR%20Performance%20Enhancement.jpg" alt="...">
+                <img class="expander-image" style="width: 100%; position: relative" src="resources/Projects/DURF/Poster%20-%20Realtime%20AR%20Performance%20Enhancement.jpg" alt="...">
               </div>
             </div>
           </div>
@@ -204,10 +205,11 @@
             <div class="expander-content-column">
               <div class="column">
                 <p><strong>Yuanhe Guo</strong>, <a href="https://hmdliu.site/">Hammond Liu</a>, Prof. <a href="https://shanghai.nyu.edu/academics/faculty/directory/hongyi-wen">Hongyi Wen</a></p>
-                <p>[code] <a href="https://github.com/MAPS-research/GEMRec">MAPS-research/GEMRec</a></p>
-                <p>[paper] Submitted to Arxiv, will be announced soon</p>
-                <p>[dataset] Hosted on huggingface, will be set public soon</p>
-                <p>[demo] Hosted on Huggingface space, will be set public soon</p>
+                <div class="case">
+                  <a href="https://github.com/MAPS-research/GEMRec" class="pill code" >Code</a>
+                  <a href="https://arxiv.org/abs/2308.02205" class="pill paper">Paper</a>
+                  <a href="https://huggingface.co/datasets/MAPS-research/GEMRec-PromptBook" class="pill dataset">Dataset</a>
+                </div>
               </div>
 <!--                <a style="font-family: 'Ubuntu Mono', monospace; background-color: beige">🤫 Not finished yet.</a>-->
             </div>
@@ -227,8 +229,10 @@
               <div class="column">
                 <p><strong>Yuanhe Guo</strong>, <a href="mailto:yc5491@nyu.edu">Yiling Cao</a>, monitored by Prof. <a href="https://shanghai.nyu.edu/academics/faculty/directory/xianbin-gu">Xianbin Gu</a></p>
                 <p>[course] CSCI-SHU 101 Introduction to Computer Science and Data Science</p>
-                <p>[code] <a href="https://github.com/RicercarG/ICS-Final-Project">Github</a></p>
-                <p>[demo] <a href="https://youtu.be/KYfP6-4sBTw">Video Presentation</a></p>
+                <div class="case">
+                  <a href="https://github.com/RicercarG/ICS-Final-Project" class="pill code">Code</a>
+                  <a href="https://youtu.be/KYfP6-4sBTw" class="pill video">Video</a>
+                </div>
               </div>
             </div>
            </div>
@@ -244,8 +248,10 @@
               <div class="column">
                 <p><strong>Yuanhe Guo</strong>, <a href="mailto:yc5491@nyu.edu">Yiling Cao</a>, monitored by Prof. <a href="https://shanghai.nyu.edu/academics/faculty/directory/li-guo">Li Guo</a></p>
                 <p>[course] CSCI-SHU 360 Machine Learning, <a href="https://sites.google.com/view/ml360-final-projects/2023-spring?authuser=0">2023 Spring</a></p>
-                <p>[code] <a href="https://github.com/RicercarG/CSCI-SHU-360-Machine-Learning-Final-Project">Github</a></p>
-                <p>[demo] <a href="https://youtu.be/JUcRDMcZEfk">Video Presentation</a></p>
+                <div class="case">
+                  <a href="https://github.com/RicercarG/CSCI-SHU-360-Machine-Learning-Final-Project" class="pill code">Code</a>
+                  <a href="https://youtu.be/JUcRDMcZEfk" class="pill video">Video</a>
+                </div>
               </div>
             </div>
            </div>
@@ -261,7 +267,9 @@
               <div class="column" style="flex-basis: 40%">
                 <p><strong>Yuanhe Guo</strong>, <a href="mailto:yx2314@nyu.edu">Jinhong Xia</a>, monitored by Prof. <a href="https://shanghai.nyu.edu/academics/faculty/directory/lihua-xu">Lihua Xu</a></p>
                 <p>[course] CSCI-SHU 213 Database Systems</p>
-                <p>[code] <a href=https://github.com/RicercarG/CSCI-SHU-213-Database-Final-Project>Github</a></p>
+                <div class="case">
+                  <a href="https://github.com/RicercarG/CSCI-SHU-213-Database-Final-Project" class="pill code">Code</a>
+                </div>
               </div>
             </div>
           </div>
@@ -273,9 +281,9 @@
 
     <section class="section" id="awards">
 
-      <div class="container" style="display: flex">
+      <div class="page" style="gap: 0">
         <div class="column" style="flex-basis: 25vw">
-          <h1 class="grid-title">Academic Awards<br>& Honors</h1>
+          <h1 class="grid-title">Academic Awards& Honors</h1>
         </div>
         <div class="column">
           <div class="grid">
@@ -305,7 +313,7 @@
         </div>
       </div>
 
-      <div class="container" style="display: flex">
+      <div class="page" style="gap: 0">
         <div class="column" style="flex-basis: 25vw">
           <h1 class="grid-title">Competition Awards</h1>
         </div>
@@ -421,7 +429,6 @@
     </section>
 
   </main>
-
   <script src="scripts/script.js"></script>
 </body>
 </html>
