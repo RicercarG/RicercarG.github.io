@@ -373,6 +373,10 @@ th {
   background-color: mediumpurple;
 }
 
+.expander-badge.acm {
+  background-color: orange;
+}
+
 
 /*.expander-content {*/
 /*  display: none;*/
@@ -442,7 +446,7 @@ th {
   justify-content: center;
   flex-shrink: 0;
   position: relative;
-  background: white;
+  background: snow;
   border-radius: 10px;
   /*box-shadow: 0 2px 15px rgba(52,52,52,0.2);*/
   /*border: 2px solid rgba(52, 52, 52, 0.2);*/
@@ -479,7 +483,7 @@ th {
 }
 
 .expander .pill.paper {
-  background-color: orange;
+  background-color: tomato;
 }
 
 .expander .pill.video {
@@ -487,6 +491,10 @@ th {
 }
 
 .expander .pill.dataset {
+  background-color: orange;
+}
+
+.expander .pill.demo {
   background-color: #FFC83D;
 }
 
