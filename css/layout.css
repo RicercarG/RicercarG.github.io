@@ -465,7 +465,7 @@ th {
   color: #fff;
   /*font-size: 12px;*/
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: 5px;
   /*margin-right: 10px;*/
   font-family: "Ubuntu Mono", monospace;
   border: 2px solid transparent;
@@ -496,6 +496,10 @@ th {
 
 .expander .pill.demo {
   background-color: #FFC83D;
+}
+
+.expander .pill.projectpage {
+  background-color: #270e83;
 }
 
 .grid {
