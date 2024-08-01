@@ -56,8 +56,8 @@ h2 {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex; /* Display the list items horizontally */
-  justify-content: space-between; !* Center the list items horizontally *!
+  display: flex; 
+  justify-content: space-between; /* Center the list items horizontally */
 }
 
 .nav .left-items {
