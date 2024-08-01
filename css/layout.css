@@ -57,15 +57,12 @@ h2 {
   padding: 0;
   margin: 0;
   display: flex; 
-  justify-content: space-between; /* Center the list items horizontally */
+  /* align-items: center; */
+  /* justify-content: space-between; */
 }
 
-.nav .left-items {
-  display: flex;
-}
-
-.nav .right-items {
-  display: flex;
+/* seperate nav-right to group them to the right */
+.nav .nav-sepearted:first-of-type {
   margin-left: auto;
 }
 
