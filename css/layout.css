@@ -57,7 +57,16 @@ h2 {
   padding: 0;
   margin: 0;
   display: flex; /* Display the list items horizontally */
-  /*justify-content: space-between; !* Center the list items horizontally *!*/
+  justify-content: space-between; !* Center the list items horizontally *!
+}
+
+.nav .left-items {
+  display: flex;
+}
+
+.nav .right-items {
+  display: flex;
+  margin-left: auto;
 }
 
 .nav li {
@@ -377,6 +386,10 @@ th {
   background-color: orange;
 }
 
+.expander-badge.leaderboard {
+  /* background-color: #61afca; */
+  background-color: #57068c;
+}
 
 /*.expander-content {*/
 /*  display: none;*/
@@ -500,6 +513,11 @@ th {
 
 .expander .pill.projectpage {
   background-color: #270e83;
+}
+
+.expander .info {
+  font-family: 'Ubuntu Mono', monospace;
+  background-color: beige;
 }
 
 .grid {
