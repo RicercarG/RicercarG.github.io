@@ -57,13 +57,9 @@ h2 {
   padding: 0;
   margin: 0;
   display: flex; 
+  width: 100%;
   /* align-items: center; */
   /* justify-content: space-between; */
-}
-
-/* seperate nav-right to group them to the right */
-.nav .nav-sepearted:first-of-type {
-  margin-left: auto;
 }
 
 .nav li {
@@ -98,10 +94,15 @@ h2 {
   transition: all 0.3s ease;
 }
 
+/* .nav li:last-child {
+  margin-left: auto;
+} */
 
-.nav li:last-child {
-  margin-left: auto; /* Push the fourth li element to the rightmost side */
+.nav li.placeholder {
+  margin-left: auto;
+  margin-right: auto;
 }
+
 
 .nav a {
   display: block;
