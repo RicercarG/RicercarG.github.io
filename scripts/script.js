@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  const navs = document.querySelectorAll('.nav-grouped');
+//   const navs = document.querySelectorAll('.nav-grouped');
+  const navs = document.querySelectorAll(['.nav-grouped']);
 
   navs.forEach(function(nav) {
     // console.log(nav)
