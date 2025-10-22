@@ -3,6 +3,23 @@
 body {
   background: #FBF6EF;
 }
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/resources/Textures/olga-thelavart-vS3idIiYxX0-unsplash.jpg');
+  background-repeat: repeat;
+  background-size: 200px;
+  background-position: center;
+  background-blend-mode: multiply;
+  opacity: 1;
+  z-index: -1;
+}
+
 a {
   color: #726d6d;
   /*text-decoration: none;*/
@@ -32,12 +49,12 @@ h2 {
 
 .header {
   width: 100%;
-  background: #FBF6EF;
+  background: rgba(251, 246, 239, 0.8);
+  backdrop-filter: blur(100px);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
-  /*For animation dark mode*/
   transition: .4s;
   /*border-bottom: 2px solid rgba(0, 0, 0, 0.1);*/
 }
@@ -269,6 +286,7 @@ h2 {
   /*background-color: #282827;*/
   filter: drop-shadow(0 2px 20px rgba(28, 28, 28, 0.15));
   background-color: rgba(255, 255, 255, 0.71);
+  backdrop-filter: blur(1px);
   /*overflow-y: scroll;*/
   max-height: 80vh;
   display: flex;
@@ -305,7 +323,7 @@ h2 {
 
 
 .edu-card.nyu {
-  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://riskeconomicsinc.com/wp-content/uploads/2022/01/RiskEcon-Lab_Aug-2011.jpg");
+  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://media.licdn.com/dms/image/v2/D4E3DAQHPAijludRLKw/image-scale_191_1128/image-scale_191_1128/0/1732206930729/courant_institute_cover?e=2147483647&v=beta&t=XASQpxVu6dcKPa2GAv1zRjfwnfLcUHCHc5fHRV0l9_Y");
 }
 
 .edu-card.nyush {
