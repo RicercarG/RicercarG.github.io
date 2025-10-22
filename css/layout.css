@@ -303,7 +303,12 @@ h2 {
   font-family: "inter", sans-serif;
 }
 
+
 .edu-card.nyu {
+  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://riskeconomicsinc.com/wp-content/uploads/2022/01/RiskEcon-Lab_Aug-2011.jpg");
+}
+
+.edu-card.nyush {
   background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://dail.shanghai.nyu.edu/sites/default/files/styles/home_page_slideshow/public/2023-03/WechatIMG34.jpeg?itok=I2zPGR_7");
 }
 
@@ -353,8 +358,15 @@ th {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 5px;
   /*transition: color 0.3s ease;*/
 }
+
+/* Push everything except the first element to the right */
+.expander-header > .expander-badge:first-of-type {
+  margin-left: auto;
+}
+
 
 .expander:hover .expander-header{
   /*background-color: orange;*/
@@ -387,6 +399,10 @@ th {
 
 .expander-badge.acm {
   background-color: orange;
+}
+
+.expander-badge.cvf {
+  background-color: steelblue;
 }
 
 .expander-badge.leaderboard {
