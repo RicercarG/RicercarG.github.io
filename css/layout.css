@@ -13,10 +13,10 @@ body::before {
   height: 100%;
   background-image: url('/resources/Textures/olga-thelavart-vS3idIiYxX0-unsplash.jpg');
   background-repeat: repeat;
-  background-size: 200px;
+  background-size: 300px;
   background-position: center;
   background-blend-mode: multiply;
-  opacity: 1;
+  opacity: 0.7;
   z-index: -1;
 }
 
@@ -440,7 +440,8 @@ th {
   transition: all 0.5s step-start;
 }
 .expander.show {
-  background-color: #FBF6EF;
+  background-color: rgba(251, 246, 239, 0);
+  /*background-color: #FBF6EF;*/
   /*border: 2px solid whitesmoke;*/
   border-top: 2px solid orange;
   border-radius: 0;
