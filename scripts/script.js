@@ -1,3 +1,38 @@
+// Handle hash-based navigation
+function handleHashNavigation() {
+  const hash = window.location.hash;
+  
+  if (hash) {
+    const section = document.querySelector(hash);
+    const navLink = document.querySelector(`.nav-link[href="${hash}"]`);
+    
+    if (section && navLink) {
+      const navItem = navLink.closest('.nav-grouped');
+      
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-grouped').forEach(n => n.classList.remove('active'));
+      
+      section.classList.add('active');
+      if (navItem) {
+        navItem.classList.add('active');
+      }
+    }
+  } else {
+    // Show home tab by default when no hash
+    document.getElementById('home').classList.add('active');
+    const homeNav = document.querySelector('.nav-link[href="#home"]').closest('.nav-grouped');
+    if (homeNav) homeNav.classList.add('active');
+  }
+}
+
+// Initialize hash navigation on page load
+window.addEventListener('DOMContentLoaded', () => {
+  handleHashNavigation();
+});
+
+// Handle hash changes (e.g., browser back/forward)
+window.addEventListener('hashchange', handleHashNavigation);
+
 // randomly add decorations to the first page
 window.addEventListener('DOMContentLoaded', () => {
   const randomItems = document.querySelectorAll('.sticker');
@@ -56,19 +91,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const navs = document.querySelectorAll(['.nav-grouped']);
 
   navs.forEach(function(nav) {
-    // console.log(nav)
-
     nav.addEventListener('click', function() {
       navs.forEach(function(nav) {
         nav.classList.remove('active');
         const sectionId = nav.getElementsByClassName("nav-link")[0].getAttribute("href").substring(1);
-        console.log(sectionId)
         document.getElementById(sectionId).classList.remove('active');
       });
       nav.classList.add('active');
       const sectionId = nav.getElementsByClassName("nav-link")[0].getAttribute("href").substring(1);
-      console.log(nav)
-      document.getElementById(sectionId).classList.toggle('active');
+      document.getElementById(sectionId).classList.add('active');
     });
   });
 });
