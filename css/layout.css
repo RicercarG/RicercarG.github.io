@@ -323,15 +323,15 @@ h2 {
 
 
 .edu-card.nyu {
-  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://media.licdn.com/dms/image/v2/D4E3DAQHPAijludRLKw/image-scale_191_1128/image-scale_191_1128/0/1732206930729/courant_institute_cover?e=2147483647&v=beta&t=XASQpxVu6dcKPa2GAv1zRjfwnfLcUHCHc5fHRV0l9_Y");
+  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("../resources/ExternalImages/courant_institute_cover.jpg");
 }
 
 .edu-card.nyush {
-  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("https://dail.shanghai.nyu.edu/sites/default/files/styles/home_page_slideshow/public/2023-03/WechatIMG34.jpeg?itok=I2zPGR_7");
+  background: linear-gradient(to right, #3e1d7a 40%, transparent), url("../resources/ExternalImages/nyu_shanghai.jpg");
 }
 
 .edu-card.jdfz {
-  background: linear-gradient(to right, #651034 40%, transparent), url("https://jdfx.jdjy.sh.cn/api/thumb/a90b617004e6ffb1d7c405e70b97edea/--0-0.jpg");
+  background: linear-gradient(to right, #651034 40%, transparent), url("../resources/ExternalImages/jdfz.jpg");
   background-size: cover;
 }
 
