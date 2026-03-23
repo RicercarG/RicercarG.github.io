@@ -1,54 +1,54 @@
-// Fade header background in as user scrolls
+// Fade header background in as user scrolls (runs once, persistent across SPA navigation)
 (function () {
   const header = document.getElementById('header');
   if (!header) return;
   const minOpacity = 0.4;
-  const maxScroll = 120; // px to reach full opacity
-
+  const maxScroll = 120;
   function updateHeader() {
     const opacity = minOpacity + Math.min(window.scrollY / maxScroll, 1) * (0.99 - minOpacity);
     header.style.background = `rgba(251, 246, 239, ${opacity})`;
   }
-
   window.addEventListener('scroll', updateHeader, { passive: true });
-  updateHeader(); // set initial state
+  updateHeader();
 })();
 
-// Randomly position stickers on the home page
-window.addEventListener('DOMContentLoaded', () => {
-  const randomItems = document.querySelectorAll('.sticker');
+// Expander toggle — event delegation so it works after SPA content swap without re-init
+document.addEventListener('click', function (e) {
+  const h = e.target.closest('.expander-header');
+  if (h) h.closest('.expander')?.classList.toggle('show');
+});
+
+// ── Per-page initializers ──
+
+function initStickers() {
+  const items = document.querySelectorAll('.sticker');
   const container = document.querySelector('.name');
-  if (!container || randomItems.length === 0) return;
-
-  const containerWidth = container.clientWidth - 100;
-  const containerHeight = container.clientHeight;
-
-  randomItems.forEach(item => {
-    const left = Math.floor(Math.random() * containerWidth);
-    const top = Math.floor(Math.random() * containerHeight);
-    item.style.left = `${left}px`;
-    item.style.top = `${top}px`;
+  if (!container || items.length === 0) return;
+  const headerH = document.getElementById('header')?.offsetHeight || 0;
+  document.documentElement.style.setProperty('--header-h', headerH + 'px');
+  const w = container.clientWidth - 100;
+  const h = container.clientHeight;
+  items.forEach(item => {
+    item.style.left = Math.floor(Math.random() * w) + 'px';
+    item.style.top  = headerH + Math.floor(Math.random() * (h - headerH)) + 'px';
   });
-});
+}
 
-// Toggle expander open/close
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.expander').forEach(function (expander) {
-    const heading = expander.querySelector('.expander-header');
-    heading.addEventListener('click', function () {
-      expander.classList.toggle('show');
-    });
-  });
-});
+let _galleryResizeHandler = null;
 
-// Gallery masonry layout + filter
-document.addEventListener('DOMContentLoaded', function () {
-  const container  = document.querySelector('.gallery-masonry');
+function initGallery() {
+  const container = document.querySelector('.gallery-masonry');
+  if (!container) return;
+
+  // Remove previous resize handler to avoid accumulation
+  if (_galleryResizeHandler) {
+    window.removeEventListener('resize', _galleryResizeHandler);
+    _galleryResizeHandler = null;
+  }
+
   const filterBtns = document.querySelectorAll('.gallery-filter-btn');
   const allItems   = Array.from(document.querySelectorAll('.gallery-item'));
   const GAP = 10;
-
-  if (!container) return;
 
   function colCount() {
     const w = window.innerWidth;
@@ -61,65 +61,53 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function layout() {
     const visible = allItems.filter(el => !el.classList.contains('hidden'));
-    const cols = colCount();
-    const containerW = container.offsetWidth;
-    const colW = (containerW - GAP * (cols - 1)) / cols;
+    const cols    = colCount();
+    const colW    = (container.offsetWidth - GAP * (cols - 1)) / cols;
     const heights = new Array(cols).fill(0);
-
     visible.forEach(item => {
       item.style.width = colW + 'px';
-      const shortest = heights.indexOf(Math.min(...heights));
-      item.style.left = (shortest * (colW + GAP)) + 'px';
-      item.style.top  = heights[shortest] + 'px';
-      heights[shortest] += item.offsetHeight + GAP;
+      const s = heights.indexOf(Math.min(...heights));
+      item.style.left = (s * (colW + GAP)) + 'px';
+      item.style.top  = heights[s] + 'px';
+      heights[s] += item.offsetHeight + GAP;
     });
-
     container.style.height = Math.max(...heights) + 'px';
   }
 
-  // Wait for all images to load before first layout
-  const imgs = Array.from(container.querySelectorAll('img'));
   let loaded = 0;
-  function onImgLoad() {
-    loaded++;
-    if (loaded === imgs.length) layout();
+  const imgs = Array.from(container.querySelectorAll('img'));
+  if (imgs.length === 0) {
+    layout();
+  } else {
+    imgs.forEach(img => {
+      if (img.complete) { if (++loaded === imgs.length) layout(); }
+      else img.addEventListener('load', () => { if (++loaded === imgs.length) layout(); });
+    });
   }
-  imgs.forEach(img => {
-    if (img.complete) onImgLoad();
-    else img.addEventListener('load', onImgLoad);
-  });
 
-  // Re-layout on resize (debounced)
   let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(layout, 80);
-  });
+  _galleryResizeHandler = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(layout, 80); };
+  window.addEventListener('resize', _galleryResizeHandler);
 
-  // Filter buttons
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const filter = btn.dataset.filter;
-      allItems.forEach(item => {
-        item.classList.toggle('hidden', filter !== 'all' && item.dataset.category !== filter);
-      });
+      allItems.forEach(item => item.classList.toggle('hidden', filter !== 'all' && item.dataset.category !== filter));
       layout();
     });
   });
-});
 
-// Lightbox
-document.addEventListener('DOMContentLoaded', function () {
-  const allGalleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-  if (allGalleryItems.length === 0) return;
+  // Lightbox — remove old overlay before creating new one
+  document.querySelector('.lightbox-overlay')?.remove();
 
   const overlay = document.createElement('div');
   overlay.className = 'lightbox-overlay';
   overlay.innerHTML = `
     <div class="lightbox-image-panel">
       <img class="lightbox-img" src="" alt="">
+      <div class="lightbox-dots"></div>
     </div>
     <div class="lightbox-info-panel">
       <button class="lightbox-close">&times;</button>
@@ -132,85 +120,130 @@ document.addEventListener('DOMContentLoaded', function () {
         <button class="lightbox-nav-btn" id="lb-prev">&larr; Prev</button>
         <button class="lightbox-nav-btn" id="lb-next">Next &rarr;</button>
       </div>
-    </div>
-  `;
+    </div>`;
   document.body.appendChild(overlay);
 
-  const lbImg      = overlay.querySelector('.lightbox-img');
-  const lbIndex    = overlay.querySelector('.lightbox-index');
-  const lbCaption  = overlay.querySelector('.lightbox-caption-text');
-  const lbCounter  = overlay.querySelector('.lightbox-counter');
-  const lbLabel    = overlay.querySelector('.lightbox-section-label');
-  const lbClose    = overlay.querySelector('.lightbox-close');
-  const lbPrev     = overlay.querySelector('#lb-prev');
-  const lbNext     = overlay.querySelector('#lb-next');
+  const lbImg     = overlay.querySelector('.lightbox-img');
+  const lbIndex   = overlay.querySelector('.lightbox-index');
+  const lbCaption = overlay.querySelector('.lightbox-caption-text');
+  const lbCounter = overlay.querySelector('.lightbox-counter');
+  const lbLabel   = overlay.querySelector('.lightbox-section-label');
+  const lbClose   = overlay.querySelector('.lightbox-close');
+  const lbPrev    = overlay.querySelector('#lb-prev');
+  const lbNext    = overlay.querySelector('#lb-next');
+  const lbDots    = overlay.querySelector('.lightbox-dots');
 
-  let currentItems = [];
-  let currentIndex = 0;
-  let sectionLabel = '';
+  let currentItems = [], currentIndex = 0, sectionLabel = '';
+
+  const MAX_DOTS = 9;
+  function updateDots() {
+    const total = currentItems.length;
+    if (total <= 1) { lbDots.innerHTML = ''; return; }
+    const half = Math.floor(MAX_DOTS / 2);
+    let start = Math.max(0, Math.min(currentIndex - half, total - MAX_DOTS));
+    let end   = Math.min(total, start + MAX_DOTS);
+    let html  = '';
+    for (let i = start; i < end; i++) {
+      html += `<span class="lightbox-dot${i === currentIndex ? ' active' : ''}"></span>`;
+    }
+    lbDots.innerHTML = html;
+  }
 
   function dateFromSrc(src) {
-    const filename = src.split('/').pop();
-    const m = filename.match(/^(\d{4})\.(\d{2})\.(\d{2})/);
+    const m = src.split('/').pop().match(/^(\d{4})\.(\d{2})\.(\d{2})/);
     if (!m) return '';
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return `${months[parseInt(m[2]) - 1]} ${parseInt(m[3])}, ${m[1]}`;
+    return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m[2]-1]
+           + ` ${+m[3]}, ${m[1]}`;
   }
 
   function showItem() {
-    const item    = currentItems[currentIndex];
-    const img     = item.querySelector('img');
-    const caption = item.querySelector('.caption');
+    const item = currentItems[currentIndex];
+    const img  = item.querySelector('img');
+    const cap  = item.querySelector('.caption');
     lbImg.src             = img.src;
     lbImg.alt             = img.alt;
-    lbCaption.textContent = caption ? caption.textContent.trim() : '';
+    lbCaption.textContent = cap ? cap.textContent.trim() : '';
     lbIndex.textContent   = dateFromSrc(img.src);
     lbCounter.textContent = `${currentIndex + 1} \u2014 ${currentItems.length}`;
     lbLabel.textContent   = sectionLabel;
     lbPrev.disabled       = currentIndex === 0;
     lbNext.disabled       = currentIndex === currentItems.length - 1;
+    updateDots();
   }
 
-  function open(items, index, label) {
-    currentItems = items;
-    currentIndex = index;
-    sectionLabel = label;
+  let _scrollY = 0;
+
+  function openLB(items, idx, label) {
+    currentItems = items; currentIndex = idx; sectionLabel = label;
     showItem();
     overlay.classList.add('open');
+    _scrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${_scrollY}px`;
+    document.body.style.width = '100%';
   }
 
-  function close() {
+  function closeLB() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, _scrollY);
   }
 
-  lbClose.addEventListener('click', close);
-  overlay.querySelector('.lightbox-image-panel').addEventListener('click', close);
+  lbClose.addEventListener('click', closeLB);
+
+  // Swipe to navigate on mobile
+  let _touchStartX = 0;
+  overlay.addEventListener('touchstart', e => { _touchStartX = e.touches[0].clientX; }, { passive: true });
+  overlay.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - _touchStartX;
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0 && currentIndex < currentItems.length - 1) { currentIndex++; showItem(); }
+    if (dx > 0 && currentIndex > 0)                       { currentIndex--; showItem(); }
+  }, { passive: true });
+
+  overlay.querySelector('.lightbox-image-panel').addEventListener('click', closeLB);
   lbPrev.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; showItem(); } });
   lbNext.addEventListener('click', () => { if (currentIndex < currentItems.length - 1) { currentIndex++; showItem(); } });
 
-  document.addEventListener('keydown', e => {
+  // Self-removing keydown handler — cleans itself up when the overlay is replaced
+  document.addEventListener('keydown', function lbKeys(e) {
+    if (!overlay.isConnected) { document.removeEventListener('keydown', lbKeys); return; }
     if (!overlay.classList.contains('open')) return;
-    if (e.key === 'Escape') close();
+    if (e.key === 'Escape') closeLB();
     if (e.key === 'ArrowLeft'  && currentIndex > 0)                       { currentIndex--; showItem(); }
     if (e.key === 'ArrowRight' && currentIndex < currentItems.length - 1) { currentIndex++; showItem(); }
   });
 
-  allGalleryItems.forEach(item => {
+  allItems.forEach(item => {
     item.addEventListener('click', () => {
-      const visible = allGalleryItems.filter(it => !it.classList.contains('hidden'));
-      const idx = visible.indexOf(item);
-      const label = item.dataset.section || 'Gallery';
-      open(visible, idx, label);
+      const visible = allItems.filter(it => !it.classList.contains('hidden'));
+      openLB(visible, visible.indexOf(item), item.dataset.section || 'Gallery');
     });
   });
-});
-
-// Open external links in a new tab
-const anchorTags = document.getElementsByTagName('a');
-for (let i = 0; i < anchorTags.length; i++) {
-  if (!anchorTags[i].classList.contains('catalog') && !anchorTags[i].classList.contains('nav-link')) {
-    anchorTags[i].setAttribute('target', '_blank');
-  }
 }
+
+function initExternalLinks() {
+  // Only target main content links so nav links are unaffected
+  document.querySelectorAll('main a').forEach(a => {
+    if (!a.classList.contains('catalog') && !a.classList.contains('nav-link'))
+      a.setAttribute('target', '_blank');
+  });
+}
+
+// Called by router after every SPA navigation, and once on initial load
+window.initPageScripts = function (page) {
+  if (page === 'index.html') initStickers();
+  if (page === 'gallery.html') initGallery();
+  initExternalLinks();
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  let page = location.pathname.split('/').pop() || '';
+  if (!page || page === '/') page = 'index.html';
+  else if (!page.endsWith('.html')) page = page + '.html';
+  window.initPageScripts(page);
+});

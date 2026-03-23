@@ -1,5 +1,6 @@
 <nav class="nav" id="nav">
-  <ul>
+  <!-- Desktop nav -->
+  <ul id="nav-list">
     <li class="nav-grouped"><a class="nav-link" href="index.html">Home</a></li>
     <li class="nav-grouped"><a class="nav-link" href="about.html">About</a></li>
     <li class="nav-grouped"><a class="nav-link" href="projects.html">Projects</a></li>
@@ -11,4 +12,43 @@
     <li class="nav-separated"><a href="https://github.com/RicercarG" target="_blank"><i class="fab fa-github"></i></a></li>
     <li class="nav-separated"><a href="mailto:yg2709@nyu.edu">yg2709@nyu.edu</a></li>
   </ul>
+
+  <!-- Mobile nav: Home (always expanded) -->
+  <div class="nav-m-home" id="nav-m-home">
+    <div class="nav-m-home-top">
+      <span class="nav-m-home-title-row">
+        <i class="fas fa-home nav-m-home-ghost-icon" aria-hidden="true"></i>
+        <span class="nav-m-home-title">Home</span>
+      </span>
+      <div class="nav-m-socials">
+        <a href="https://www.linkedin.com/in/yuanhe-guo-86ab25246/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/RicercarG" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:yg2709@nyu.edu"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="nav-m-home-links">
+      <a class="nav-m-home-link" href="about.html">About</a>
+      <a class="nav-m-home-link" href="projects.html">Projects</a>
+      <a class="nav-m-home-link" href="awards.html">Awards</a>
+      <a class="nav-m-home-link" href="gallery.html">Gallery</a>
+    </div>
+  </div>
+
+  <!-- Mobile nav: Other pages (expandable) -->
+  <div class="nav-m-page" id="nav-m-page">
+    <div class="nav-m-page-top" id="nav-m-page-top">
+      <span class="nav-m-page-title-row">
+        <span class="nav-m-page-name" id="nav-m-page-name">—</span>
+        <i class="fas fa-chevron-down nav-m-page-chevron" aria-hidden="true"></i>
+      </span>
+      <div class="nav-m-socials">
+        <a href="https://www.linkedin.com/in/yuanhe-guo-86ab25246/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/RicercarG" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:yg2709@nyu.edu"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="nav-m-page-links" id="nav-m-page-links">
+      <!-- Populated by JS -->
+    </div>
+  </div>
 </nav>

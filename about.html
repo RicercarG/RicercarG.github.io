@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="scripts/viewport-zoom.js"></script>
   <title>Ricercar — About</title>
   <link rel="stylesheet" type="text/css" href="css/layout.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
@@ -22,9 +24,15 @@
           <div class="infocard">
             <div class="container" style="height: 15px; width: 80px; border: 3px solid #cecece; border-radius: 10px; margin: 20px 0"></div>
             <div class="container content" style="position: relative; width: 100%; max-height: 100%; border-radius: 10px; background: linear-gradient(135deg, linen, #e7e1db); padding: 20px; text-align: center">
-              <h2>Yuanhe Guo <br> (Ricercar)</h2>
-              <img class="img" src="resources/Background/me-photo2.jpg" alt="...">
-              <p>I'm a first year PhD student pursuing in code and tech as well as art and music.<br> <strong>Research interest: multimodal machine learning models which combine vision, audio and language.</strong></p>
+              <div class="infocard-identity">
+                <h2>Yuanhe Guo <br> (Ricercar)</h2>
+                <img class="img" src="resources/Background/me-photo2.jpg" alt="...">
+              </div>
+              <p>
+                I'm a first year PhD student pursuing in code and tech as well as art and music.<br> 
+                <strong>Research interest: <br> 
+                  Multimodal generative modeling, with a focus on personalized multimodal understanding and controllable generation, producing human editable artifacts.</strong>
+              </p>
             </div>
           </div>
         </div>
@@ -108,5 +116,6 @@
 
   <script src="scripts/nav-loader.js"></script>
   <script src="scripts/script.js"></script>
+  <script src="scripts/router.js"></script>
 </body>
 </html>
