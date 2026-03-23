@@ -769,18 +769,219 @@ th {
   box-shadow: 0 14px 80px rgba(34, 35, 58, 0.4);
 }
 
-.gallery {
-  width: 100%;
-  height: 60vh;
-    /*background-color: #232222;*/
-  overflow-x: auto;
-  overflow-y: hidden;
+/* Gallery filter bar */
+.gallery-filter-bar {
   display: flex;
-  gap: 5px;
-  margin-bottom: 100px;
-  /*background-color: #000;*/
-  /*border-radius: 10px;*/
-  /*border: 5px solid black;*/
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 28px 0 24px;
+}
+
+.gallery-filter-btn {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 13px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gallery-filter-btn:hover {
+  border-color: orange;
+  color: orange;
+}
+
+.gallery-filter-btn.active {
+  background: orange;
+  border-color: orange;
+  color: white;
+}
+
+.filter-count {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+/* Masonry grid */
+.gallery-masonry {
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.gallery-item {
+  position: absolute;
+}
+
+.gallery-item {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #eee;
+  box-sizing: border-box;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+.gallery-item .caption {
+  display: none;
+}
+
+.gallery-item.hidden {
+  display: none;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  background: rgba(251, 246, 239, 0.88);
+  backdrop-filter: blur(20px);
+}
+
+.lightbox-overlay.open {
+  display: flex;
+  align-items: stretch;
+}
+
+.lightbox-image-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 48px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.lightbox-image-panel img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.lightbox-info-panel {
+  width: 360px;
+  flex-shrink: 0;
+  background: #FBF6EF;
+  display: flex;
+  flex-direction: column;
+  padding: 64px 44px 48px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #aaa;
+  padding: 0;
+  transition: color 0.2s ease;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.lightbox-close:hover {
+  color: #222;
+}
+
+.lightbox-section-label {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 32px;
+}
+
+.lightbox-index {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1.1;
+  color: rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+.lightbox-rule {
+  height: 3px;
+  width: 36px;
+  background: orange;
+  margin-bottom: 28px;
+  flex-shrink: 0;
+}
+
+.lightbox-caption-text {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #444;
+  flex: 1;
+  margin: 0;
+}
+
+.lightbox-counter {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 36px;
+  letter-spacing: 1px;
+}
+
+.lightbox-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.lightbox-nav-btn {
+  background: transparent;
+  border: 2px solid #ddd;
+  color: #555;
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 12px;
+  padding: 7px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.lightbox-nav-btn:hover:not(:disabled) {
+  border-color: orange;
+  color: orange;
+}
+
+.lightbox-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.gallery .item {
+  cursor: pointer;
 }
 
 .gallery .item {
