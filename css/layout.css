@@ -49,13 +49,12 @@ h2 {
 
 .header {
   width: 100%;
-  background: rgba(251, 246, 239, 0.8);
-  backdrop-filter: blur(100px);
+  background: rgba(251, 246, 239, 0);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
-  transition: .4s;
+  transition: background .3s;
   /*border-bottom: 2px solid rgba(0, 0, 0, 0.1);*/
 }
 
