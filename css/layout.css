@@ -840,6 +840,24 @@ th {
   opacity: 0.75;
 }
 
+.gallery-sort-btn {
+  margin-left: auto;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+.gallery-sort-btn:hover {
+  border-color: orange;
+  color: orange;
+}
+
 /* Masonry grid */
 .gallery-masonry {
   position: relative;

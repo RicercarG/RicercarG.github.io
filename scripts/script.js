@@ -70,19 +70,42 @@ async function initGallery() {
     filterBar.appendChild(btn);
   }
 
+  // Sort toggle button
+  let sortAsc = true;
+  const sortBtn = document.createElement('button');
+  sortBtn.className = 'gallery-sort-btn';
+  sortBtn.title = 'Toggle sort order';
+  sortBtn.innerHTML = '<i class="fas fa-sort-amount-up"></i>';
+  filterBar.appendChild(sortBtn);
+
   // Build gallery items with descriptions from gallery.json
   const VIDEO_EXTS = /\.(mp4|webm|mov)$/i;
+  const DATE_PREFIX = /^(\d{4}\.\d{2}\.\d{2})/;
   container.innerHTML = '';
+
+  // Flatten all items across folders and sort oldest-first by default
+  const allEntries = [];
   for (const [folder, images] of Object.entries(galleryData)) {
-    const filterId = folder.toLowerCase().replace(/\s+/g, '-');
     for (const imgData of images) {
-      const src     = `resources/Gallery/${encodeURIComponent(folder)}/${encodeURIComponent(imgData.filename)}`;
+      allEntries.push({ folder, imgData });
+    }
+  }
+  allEntries.sort((a, b) => {
+    const da = (DATE_PREFIX.exec(a.imgData.filename) || [''])[0];
+    const db = (DATE_PREFIX.exec(b.imgData.filename) || [''])[0];
+    return da.localeCompare(db);
+  });
+
+  for (const { folder, imgData } of allEntries) {
+    const filterId = folder.toLowerCase().replace(/\s+/g, '-');
+    const src     = `resources/Gallery/${encodeURIComponent(folder)}/${encodeURIComponent(imgData.filename)}`;
       const isVideo = VIDEO_EXTS.test(imgData.filename);
       const item    = document.createElement('div');
       item.className = 'gallery-item';
       item.dataset.category  = filterId;
       item.dataset.section   = folder;
       item.dataset.mediaType = isVideo ? 'video' : 'image';
+      item.dataset.date      = (DATE_PREFIX.exec(imgData.filename) || [''])[0];
 
       if (isVideo) {
         const video = document.createElement('video');
@@ -107,7 +130,6 @@ async function initGallery() {
       caption.textContent = imgData.description;
       item.appendChild(caption);
       container.appendChild(item);
-    }
   }
 
   const allItems   = Array.from(container.querySelectorAll('.gallery-item'));
@@ -167,6 +189,20 @@ async function initGallery() {
       allItems.forEach(item => item.classList.toggle('hidden', filter !== 'all' && item.dataset.category !== filter));
       layout();
     });
+  });
+
+  sortBtn.addEventListener('click', () => {
+    sortAsc = !sortAsc;
+    sortBtn.innerHTML = sortAsc
+      ? '<i class="fas fa-sort-amount-up"></i>'
+      : '<i class="fas fa-sort-amount-down"></i>';
+    const items = Array.from(container.querySelectorAll('.gallery-item'));
+    items.sort((a, b) => sortAsc
+      ? a.dataset.date.localeCompare(b.dataset.date)
+      : b.dataset.date.localeCompare(a.dataset.date)
+    );
+    items.forEach((item, i) => { container.appendChild(item); allItems[i] = item; });
+    layout();
   });
 
   // Lightbox — remove old overlay before creating new one
@@ -250,7 +286,7 @@ async function initGallery() {
     lbCaption.textContent = cap ? cap.textContent.trim() : '';
     lbIndex.textContent   = dateFromSrc(mediaEl.src);
     lbCounter.textContent = `${currentIndex + 1} \u2014 ${currentItems.length}`;
-    lbLabel.textContent   = sectionLabel;
+    lbLabel.textContent   = item.dataset.section || sectionLabel;
     lbPrev.disabled       = currentIndex === 0;
     lbNext.disabled       = currentIndex === currentItems.length - 1;
     updateDots();
