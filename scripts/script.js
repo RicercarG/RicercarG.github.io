@@ -36,9 +36,10 @@ function initStickers() {
 
 let _galleryResizeHandler = null;
 
-function initGallery() {
+async function initGallery() {
   const container = document.querySelector('.gallery-masonry');
-  if (!container) return;
+  const filterBar = document.querySelector('.gallery-filter-bar');
+  if (!container || !filterBar) return;
 
   // Remove previous resize handler to avoid accumulation
   if (_galleryResizeHandler) {
@@ -46,8 +47,71 @@ function initGallery() {
     _galleryResizeHandler = null;
   }
 
-  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
-  const allItems   = Array.from(document.querySelectorAll('.gallery-item'));
+  // Load gallery manifest
+  let galleryData;
+  try {
+    const res = await fetch('resources/Gallery/gallery.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    galleryData = await res.json();
+  } catch (e) {
+    console.error('Failed to load gallery manifest:', e);
+    return;
+  }
+
+  // Build filter buttons from folder names
+  const totalCount = Object.values(galleryData).reduce((n, imgs) => n + imgs.length, 0);
+  filterBar.innerHTML = `<button class="gallery-filter-btn active" data-filter="all">All <span class="filter-count">${totalCount}</span></button>`;
+  for (const [folder, images] of Object.entries(galleryData)) {
+    const filterId = folder.toLowerCase().replace(/\s+/g, '-');
+    const btn = document.createElement('button');
+    btn.className = 'gallery-filter-btn';
+    btn.dataset.filter = filterId;
+    btn.innerHTML = `${folder} <span class="filter-count">${images.length}</span>`;
+    filterBar.appendChild(btn);
+  }
+
+  // Build gallery items with descriptions from gallery.json
+  const VIDEO_EXTS = /\.(mp4|webm|mov)$/i;
+  container.innerHTML = '';
+  for (const [folder, images] of Object.entries(galleryData)) {
+    const filterId = folder.toLowerCase().replace(/\s+/g, '-');
+    for (const imgData of images) {
+      const src     = `resources/Gallery/${encodeURIComponent(folder)}/${encodeURIComponent(imgData.filename)}`;
+      const isVideo = VIDEO_EXTS.test(imgData.filename);
+      const item    = document.createElement('div');
+      item.className = 'gallery-item';
+      item.dataset.category  = filterId;
+      item.dataset.section   = folder;
+      item.dataset.mediaType = isVideo ? 'video' : 'image';
+
+      if (isVideo) {
+        const video = document.createElement('video');
+        video.src         = src;
+        video.muted       = true;
+        video.autoplay    = true;
+        video.loop        = true;
+        video.playsInline = true;
+        const badge = document.createElement('div');
+        badge.className = 'video-badge';
+        item.appendChild(video);
+        item.appendChild(badge);
+      } else {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = imgData.description;
+        item.appendChild(img);
+      }
+
+      const caption = document.createElement('p');
+      caption.className   = 'caption';
+      caption.textContent = imgData.description;
+      item.appendChild(caption);
+      container.appendChild(item);
+    }
+  }
+
+  const allItems   = Array.from(container.querySelectorAll('.gallery-item'));
+  const filterBtns = Array.from(filterBar.querySelectorAll('.gallery-filter-btn'));
   const GAP = 10;
 
   function colCount() {
@@ -56,7 +120,7 @@ function initGallery() {
     if (w >= 1400) return 4;
     if (w >= 1024) return 3;
     if (w >= 640)  return 2;
-    return 1;
+    return 2;
   }
 
   function layout() {
@@ -75,13 +139,19 @@ function initGallery() {
   }
 
   let loaded = 0;
-  const imgs = Array.from(container.querySelectorAll('img'));
-  if (imgs.length === 0) {
+  const mediaEls = Array.from(container.querySelectorAll('img, video'));
+  if (mediaEls.length === 0) {
     layout();
   } else {
-    imgs.forEach(img => {
-      if (img.complete) { if (++loaded === imgs.length) layout(); }
-      else img.addEventListener('load', () => { if (++loaded === imgs.length) layout(); });
+    const onReady = () => { if (++loaded === mediaEls.length) layout(); };
+    mediaEls.forEach(el => {
+      if (el.tagName === 'VIDEO') {
+        if (el.readyState >= 1) onReady();
+        else el.addEventListener('loadedmetadata', onReady, { once: true });
+      } else {
+        if (el.complete) onReady();
+        else el.addEventListener('load', onReady, { once: true });
+      }
     });
   }
 
@@ -107,6 +177,7 @@ function initGallery() {
   overlay.innerHTML = `
     <div class="lightbox-image-panel">
       <img class="lightbox-img" src="" alt="">
+      <video class="lightbox-video" controls playsinline></video>
       <div class="lightbox-dots"></div>
     </div>
     <div class="lightbox-info-panel">
@@ -124,6 +195,7 @@ function initGallery() {
   document.body.appendChild(overlay);
 
   const lbImg     = overlay.querySelector('.lightbox-img');
+  const lbVideo   = overlay.querySelector('.lightbox-video');
   const lbIndex   = overlay.querySelector('.lightbox-index');
   const lbCaption = overlay.querySelector('.lightbox-caption-text');
   const lbCounter = overlay.querySelector('.lightbox-counter');
@@ -157,13 +229,26 @@ function initGallery() {
   }
 
   function showItem() {
-    const item = currentItems[currentIndex];
-    const img  = item.querySelector('img');
-    const cap  = item.querySelector('.caption');
-    lbImg.src             = img.src;
-    lbImg.alt             = img.alt;
+    const item    = currentItems[currentIndex];
+    const isVideo = item.dataset.mediaType === 'video';
+    const mediaEl = item.querySelector(isVideo ? 'video' : 'img');
+    const cap     = item.querySelector('.caption');
+
+    lbVideo.pause();
+    if (isVideo) {
+      lbImg.style.display   = 'none';
+      lbVideo.style.display = 'block';
+      lbVideo.src           = mediaEl.src;
+    } else {
+      lbVideo.style.display = 'none';
+      lbVideo.src           = '';
+      lbImg.style.display   = 'block';
+      lbImg.src             = mediaEl.src;
+      lbImg.alt             = mediaEl.alt;
+    }
+
     lbCaption.textContent = cap ? cap.textContent.trim() : '';
-    lbIndex.textContent   = dateFromSrc(img.src);
+    lbIndex.textContent   = dateFromSrc(mediaEl.src);
     lbCounter.textContent = `${currentIndex + 1} \u2014 ${currentItems.length}`;
     lbLabel.textContent   = sectionLabel;
     lbPrev.disabled       = currentIndex === 0;
@@ -185,6 +270,8 @@ function initGallery() {
   }
 
   function closeLB() {
+    lbVideo.pause();
+    lbVideo.src = '';
     overlay.classList.remove('open');
     document.body.style.overflow = '';
     document.body.style.position = '';
@@ -206,6 +293,7 @@ function initGallery() {
   }, { passive: true });
 
   overlay.querySelector('.lightbox-image-panel').addEventListener('click', closeLB);
+  lbVideo.addEventListener('click', e => e.stopPropagation());
   lbPrev.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; showItem(); } });
   lbNext.addEventListener('click', () => { if (currentIndex < currentItems.length - 1) { currentIndex++; showItem(); } });
 

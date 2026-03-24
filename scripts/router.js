@@ -38,9 +38,9 @@
     const main = document.querySelector('main');
     const oldSection = main.querySelector('section');
     if (oldSection) {
-      oldSection.style.transition = 'opacity 0.08s ease';
+      oldSection.style.transition = 'opacity 0.3s ease';
       oldSection.style.opacity = '0';
-      await new Promise(r => setTimeout(r, 80));
+      await new Promise(r => setTimeout(r, 300));
     }
 
     // Swap page content
@@ -48,7 +48,7 @@
     section.style.opacity = '0';
     main.appendChild(section);
     section.offsetHeight; // force reflow before transition
-    section.style.transition = 'opacity 0.08s ease';
+    section.style.transition = 'opacity 0.3s ease';
     section.style.opacity = '1';
     document.title = title;
 

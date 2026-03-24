@@ -1,0 +1,66 @@
+{
+  "Blender": [
+    {
+      "filename": "2021.09.25SvgToModel.jpg",
+      "description": "I tried turning SVG to 3D models with glass texture."
+    },
+    {
+      "filename": "2021.12.09Hamsters.jpg",
+      "description": "An attempt at shading in the style of Microsoft."
+    },
+    {
+      "filename": "2022.01.10RealisticRoom.jpg",
+      "description": "My first attempt to render an interior scene following a tutorial on YouTube."
+    },
+    {
+      "filename": "2022.01.20Dream-Day.jpg",
+      "description": "My second interior render \u0014 an ideal room with all devices I dreamed of."
+    },
+    {
+      "filename": "2022.01.20Dream-Night.jpg",
+      "description": "The night version of my dream room, with completely different lighting."
+    },
+    {
+      "filename": "2022.02.09Fairlady Z-1.jpg",
+      "description": ""
+    },
+    {
+      "filename": "2022.02.09Fairlady Z-2.jpg",
+      "description": "Nissan Fairlady Z"
+    },
+    {
+      "filename": "2022.04.01Chill Cassette.mp4",
+      "description": ""
+    },
+    {
+      "filename": "2022.05.22OverTheSea.jpg",
+      "description": "An interesting work during the pandemic, when I was desperate for freedom."
+    },
+    {
+      "filename": "2022.08.19FluidCoffee.jpg",
+      "description": ""
+    },
+    {
+      "filename": "2022.10.04Highway.jpg",
+      "description": ""
+    }
+  ],
+  "Posters": [
+    {
+      "filename": "2022.10.31Speaker Poster-Dan Bullock & Raul Sanchez-2.jpg",
+      "description": "Speaker poster for TEDxNYU Shanghai November salon."
+    },
+    {
+      "filename": "2023.01.05Poster-Demo1.5.jpg",
+      "description": "TEDxNYU Shanghai February salon."
+    },
+    {
+      "filename": "2023.04.07Back.jpg",
+      "description": "Brochure for TEDxNYU Shanghai annual conference \u0014 back side."
+    },
+    {
+      "filename": "2023.04.07Front.jpg",
+      "description": "Brochure for TEDxNYU Shanghai annual conference \u0014 front side."
+    }
+  ]
+}
