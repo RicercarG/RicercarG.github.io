@@ -1114,6 +1114,11 @@ th {
     width: 100%;
   }
 
+  .section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .section .page {
     flex-direction: column;
     gap: 0;
@@ -1217,7 +1222,7 @@ th {
     display: flex;
     border-radius: 0;
     box-shadow: none;
-    padding: 0 20px 0 52px;
+    padding: 0 20px 0 40px;
   }
   .nav .nav-m-socials a {
     border-radius: 0;
@@ -1252,7 +1257,7 @@ th {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 20px 0 40px;
     min-height: 64px;
     background: rgba(255, 255, 255, 0.85);
     border-bottom: 1px solid rgba(148, 148, 148, 0.18);
@@ -1265,14 +1270,6 @@ th {
     align-items: center;
   }
 
-  .nav-m-home-ghost-icon {
-    display: flex;
-    align-items: center;
-    width: 32px;
-    flex-shrink: 0;
-    visibility: hidden;
-    font-size: 18px;
-  }
 
   .nav-m-home-title {
     font: 400 20px "Ubuntu Mono", monospace;
@@ -1302,7 +1299,7 @@ th {
     display: flex;
     align-items: center;
     height: 64px;
-    padding: 0 20px 0 52px;
+    padding: 0 20px 0 40px;
     font: 400 20px "Ubuntu Mono", monospace;
     color: #000;
     text-decoration: none;
@@ -1327,7 +1324,7 @@ th {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px 0 52px;
+    padding: 0 20px 0 40px;
     height: 64px;
     border-bottom: 1px solid rgba(148, 148, 148, 0.18);
     cursor: pointer;
@@ -1378,7 +1375,7 @@ th {
     display: flex;
     align-items: center;
     height: 64px;
-    padding: 0 20px 0 52px;
+    padding: 0 20px 0 40px;
     font: 400 20px "Ubuntu Mono", monospace;
     color: #000;
     text-decoration: none;
