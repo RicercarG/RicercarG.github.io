@@ -21,18 +21,39 @@ document.addEventListener('click', function (e) {
 
 // ── Per-page initializers ──
 
+let _stickerResizeHandler = null;
+
 function initStickers() {
   const items = document.querySelectorAll('.sticker');
   const container = document.querySelector('.name');
-  if (!container || items.length === 0) return;
-  const headerH = document.getElementById('header')?.offsetHeight || 0;
-  document.documentElement.style.setProperty('--header-h', headerH + 'px');
-  const w = container.clientWidth - 100;
-  const h = container.clientHeight;
+  const panel = document.getElementById('home');
+  if (!container || !panel || items.length === 0) return;
+
   items.forEach(item => {
-    item.style.left = Math.floor(Math.random() * w) + 'px';
-    item.style.top  = headerH + Math.floor(Math.random() * (h - headerH)) + 'px';
+    if (!item.dataset.stickerX) item.dataset.stickerX = Math.random().toString();
+    if (!item.dataset.stickerY) item.dataset.stickerY = Math.random().toString();
   });
+
+  function layoutStickers() {
+    const headerH = document.getElementById('header')?.offsetHeight || 0;
+    document.documentElement.style.setProperty('--header-h', headerH + 'px');
+    const gutter = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-gutter')) || 0;
+    const h = container.clientHeight;
+    items.forEach(item => {
+      const usableLeft = gutter;
+      const usableWidth = Math.max(panel.clientWidth - gutter * 2 - item.offsetWidth, 0);
+      const usableHeight = Math.max(h - headerH - item.offsetHeight, 0);
+      item.style.left = usableLeft + parseFloat(item.dataset.stickerX) * usableWidth + 'px';
+      item.style.top  = headerH + parseFloat(item.dataset.stickerY) * usableHeight + 'px';
+    });
+  }
+
+  if (_stickerResizeHandler) {
+    window.removeEventListener('resize', _stickerResizeHandler);
+  }
+  _stickerResizeHandler = layoutStickers;
+  window.addEventListener('resize', _stickerResizeHandler);
+  layoutStickers();
 }
 
 let _galleryResizeHandler = null;

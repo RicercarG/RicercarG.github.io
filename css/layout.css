@@ -1,7 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
+:root {
+  --site-max-width: 1440px;
+  --site-gutter: 50px;
+  --site-inline-padding: var(--site-gutter);
+}
+
 body {
   background: #FBF6EF;
+}
+
+.page-container {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
 }
 
 body::before {
@@ -55,18 +66,25 @@ h2 {
 
 .header {
   width: 100%;
+  max-width: var(--site-max-width);
   background: rgba(251, 246, 239, 0);
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 999;
   transition: background .3s;
   /*border-bottom: 2px solid rgba(0, 0, 0, 0.1);*/
 }
 
+.header > .container {
+  margin-left: var(--site-inline-padding) !important;
+  margin-right: var(--site-inline-padding) !important;
+}
+
 .nav {
   background-color: transparent;
-  padding: 30px 50px 15px 50px;
+  padding: 30px var(--site-inline-padding) 15px var(--site-inline-padding);
   overflow: auto;
 }
 
@@ -137,7 +155,7 @@ h2 {
 .section {
   display: none;
   /*padding: 6.5rem 0 1rem;*/
-  padding: 100px 50px 0 50px;
+  padding: 100px var(--site-inline-padding) 0 var(--site-inline-padding);
 }
 
 .section.active {
@@ -157,6 +175,30 @@ h2 {
   /*border: 2px solid black*/
   /*width: 100%;*/
   box-sizing: border-box;
+}
+
+#about {
+  position: relative;
+  isolation: isolate;
+}
+
+#about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #FBF6EF;
+  background-image: url("../resources/ExternalImages/fuller_shanghai.jpg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 96px, #000 calc(100% - 96px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 96px, #000 calc(100% - 96px), transparent);
+  z-index: -1;
+}
+
+#about > .page {
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -187,7 +229,7 @@ h2 {
   padding: 10px;
   bottom: 0;
   /*scale: 0.25;*/
-  width: 12vw;
+  width: min(12vw, 172.8px);
   height: auto;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
 }
@@ -200,14 +242,18 @@ h2 {
 
 /*intro*/
 
+#home {
+  position: relative;
+}
+
 .description {
   color: #000000;
   text-align: right;
   font: 400 20px "Ubuntu Mono", monospace;
-  position: relative;
-  left: 10vw;
-  bottom: -45vh;
-  width: 20vw;
+  position: fixed;
+  left: calc(max(0px, (100vw - var(--site-max-width)) / 2) + var(--site-gutter) + min(6vw, 86.4px));
+  bottom: 50vh;
+  width: min(20vw, 288px);
   /*border: 2px solid rebeccapurple;*/
 }
 
@@ -216,13 +262,16 @@ h2 {
   flex-direction: row;
   align-items: flex-end;
   justify-content: center;
-  width: 100%;
+  width: min(100vw, var(--site-max-width));
+  max-width: var(--site-max-width);
   height: 75vh;
   margin: 25vh 0 0 0;
   position: fixed;
   /*top: 10vh;*/
   bottom: 0;
-  overflow-x: clip;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-x: visible;
   /*border: 2px solid black;*/
 }
 
@@ -246,17 +295,26 @@ h2 {
 .guo {
   color: #000000;
   text-align: left;
-  font: 900 16.5vw "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: min(16.5vw, 237.6px);
+  font-weight: 900;
   position: relative;
 }
 .name-label {
   color: #000000;
   text-align: left;
-  font: 900 2vw "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: min(2vw, 28.8px);
+  font-weight: 900;
   position: absolute;
-  left: 3vw;
+  left: min(3vw, 43.2px);
   top: 0px;
 }
+
+.name-en.name-en-offset {
+  margin: max(-4.5vw, -64.8px) 0 0 0;
+}
+
 .cn {
   display: flex;
   flex-direction: column;
@@ -276,7 +334,13 @@ h2 {
   position: relative;
   color: #000000;
   text-align: left;
-  font: 900 14.5vw "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: min(14.5vw, 208.8px);
+  font-weight: 900;
+}
+
+.name-cn.name-cn-offset {
+  margin: max(-5vw, -72px) 0 0 0;
 }
 
 .infocard {
@@ -497,9 +561,21 @@ th {
 /*}*/
 
 .expander-content {
-  max-height: 0;
+  clip-path: inset(0 0 100% 0);
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: all 0.5s step-start;
+  opacity: 0;
+  transition:
+    clip-path 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease;
+  will-change: clip-path, grid-template-rows, opacity;
+}
+
+.expander-content > * {
+  min-height: 0;
+  overflow: hidden;
 }
 .expander.show {
   background-color: rgba(251, 246, 239, 0);
@@ -515,10 +591,15 @@ th {
 }
 
 .expander.show .expander-content {
-  display: block;
+  clip-path: inset(0 0 0 0);
+  grid-template-rows: 1fr;
   position: relative;
-  max-height: 10000px;
-  overflow: visible;
+  opacity: 1;
+  overflow: hidden;
+  transition:
+    clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease;
   /*background-color: #FBF6EF;*/
 }
 
@@ -537,7 +618,13 @@ th {
   justify-content: space-between;
   gap: 40px;
   /*padding: 5px 20px 20px 20px;*/
+  padding: 0;
+  transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expander.show .expander-content-column {
   padding: 20px 0 40px 0;
+  transition: padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .expander-content-column .column {
