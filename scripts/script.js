@@ -14,6 +14,7 @@
 
 // Expander toggle — event delegation so it works after SPA content swap without re-init
 document.addEventListener('click', function (e) {
+  if (e.target.closest('.expander-authors a')) return;
   const h = e.target.closest('.expander-header');
   if (h) h.closest('.expander')?.classList.toggle('show');
 });
