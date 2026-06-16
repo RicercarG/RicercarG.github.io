@@ -68,13 +68,29 @@ test('expanded content does not duplicate project author paragraphs', () => {
   }
 });
 
-test('expanded author line uses paragraph typography instead of being hidden', () => {
+test('expanded title and authors keep collapsed header styling', () => {
+  const collapsedHeaderRule = /\.expander-header\s*{(?<body>[^}]*)}/.exec(css);
+  const collapsedTitleBlockRule = /\.expander-title-block\s*{(?<body>[^}]*)}/.exec(css);
+  const collapsedAuthorRule = /\.expander-authors\s*{(?<body>[^}]*)}/.exec(css);
+  const expandedHeaderRule = /\.expander\.show\s+\.expander-header\s*{(?<body>[^}]*)}/.exec(css);
+  const expandedTitleBlockRule = /\.expander\.show\s+\.expander-title-block\s*{(?<body>[^}]*)}/.exec(css);
+  const expandedTitleRule = /\.expander\.show\s+\.expander-title\s*{(?<body>[^}]*)}/.exec(css);
   const expandedAuthorRule = /\.expander\.show\s+\.expander-authors\s*{(?<body>[^}]*)}/.exec(css);
 
-  assert.ok(expandedAuthorRule);
-  assert.doesNotMatch(expandedAuthorRule.groups.body, /display:\s*none/);
-  assert.match(expandedAuthorRule.groups.body, /font-family:\s*"inter",\s*sans-serif/);
-  assert.match(expandedAuthorRule.groups.body, /line-height:\s*1\.5/);
+  assert.ok(collapsedHeaderRule);
+  assert.ok(collapsedTitleBlockRule);
+  assert.ok(collapsedAuthorRule);
+  assert.ok(expandedHeaderRule);
+  assert.ok(expandedTitleBlockRule);
+  assert.match(collapsedHeaderRule.groups.body, /font-size:\s*18px/);
+  assert.match(collapsedTitleBlockRule.groups.body, /transition:\s*gap\s+0\.3s\s+ease/);
+  assert.match(collapsedAuthorRule.groups.body, /font-size:\s*14px/);
+  assert.match(expandedHeaderRule.groups.body, /font-family:\s*"Ubuntu Mono",\s*monospace/);
+  assert.match(expandedHeaderRule.groups.body, /font-size:\s*18px/);
+  assert.match(expandedHeaderRule.groups.body, /padding:\s*0/);
+  assert.match(expandedTitleBlockRule.groups.body, /gap:\s*12px/);
+  assert.equal(expandedTitleRule, null);
+  assert.equal(expandedAuthorRule, null);
 });
 
 test('clicking collapsed author links does not toggle the expander', () => {
