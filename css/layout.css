@@ -74,12 +74,7 @@ h2 {
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
-  transition: box-shadow .25s ease;
   /*border-bottom: 2px solid rgba(0, 0, 0, 0.1);*/
-}
-
-.header.scrolled {
-  box-shadow: 0 8px 20px rgba(80, 63, 43, 0.08);
 }
 
 .header::before {

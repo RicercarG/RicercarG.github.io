@@ -1,16 +1,3 @@
-// Add a subtle header shadow once content starts scrolling underneath.
-(function () {
-  const header = document.getElementById('header');
-  if (!header) return;
-
-  function updateHeaderShadow() {
-    header.classList.toggle('scrolled', window.scrollY > 4);
-  }
-
-  window.addEventListener('scroll', updateHeaderShadow, { passive: true });
-  updateHeaderShadow();
-})();
-
 // Expander toggle — event delegation so it works after SPA content swap without re-init
 document.addEventListener('click', function (e) {
   if (e.target.closest('.expander-authors a')) return;

@@ -48,6 +48,12 @@ test('live pages disable Safari telephone auto-detection', () => {
   }
 });
 
+test('header does not add a scroll shadow', () => {
+  assert.doesNotMatch(script, /updateHeaderShadow/);
+  assert.doesNotMatch(script, /classList\.toggle\('scrolled'/);
+  assert.doesNotMatch(css, /^\.header\.scrolled\s*{/m);
+});
+
 test('project expander headers include collapsed author text', () => {
   const headers = extractProjectHeaderAreas(html);
 
