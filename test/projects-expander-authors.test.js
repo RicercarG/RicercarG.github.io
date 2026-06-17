@@ -374,6 +374,16 @@ test('HOME description anchors to the capped content panel', () => {
   assert.doesNotMatch(descriptionRule.groups.body, /width:\s*20vw/);
 });
 
+test('mobile HOME description is hidden while desktop stays visible', () => {
+  const descriptionRule = /^\.description\s*{(?<body>[^}]*)}/m.exec(css);
+  const mobileDescriptionRule = /@media\s*\(max-width:\s*980px\)\s*{[\s\S]*?\.description\s*{(?<body>[^}]*)}[\s\S]*?\n}\s*\n\s*@media\s*\(max-width:\s*640px\)/m.exec(css);
+
+  assert.ok(descriptionRule);
+  assert.ok(mobileDescriptionRule);
+  assert.doesNotMatch(descriptionRule.groups.body, /display:\s*none/);
+  assert.match(mobileDescriptionRule.groups.body, /display:\s*none/);
+});
+
 test('HOME stickers anchor and scale to the capped site width', () => {
   const homeRule = /^#home\s*{(?<body>[^}]*)}/m.exec(css);
   const stickerRule = /^\.sticker\s*{(?<body>[^}]*)}/m.exec(css);
