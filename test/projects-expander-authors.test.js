@@ -5,6 +5,8 @@ const assert = require('node:assert/strict');
 const html = readFileSync('projects.html', 'utf8');
 const indexHtml = readFileSync('index.html', 'utf8');
 const aboutHtml = readFileSync('about.html', 'utf8');
+const awardsHtml = readFileSync('awards.html', 'utf8');
+const galleryHtml = readFileSync('gallery.html', 'utf8');
 const archiveHtml = readFileSync('Archive/index_archive.html', 'utf8');
 const script = readFileSync('scripts/script.js', 'utf8');
 const css = readFileSync('css/layout.css', 'utf8');
@@ -28,6 +30,23 @@ function extractProjectBlockByTitle(title) {
   const projectBlockEnd = nextProjectStart === -1 ? html.length : nextProjectStart;
   return html.slice(projectBlockStart, projectBlockEnd);
 }
+
+test('live pages disable Safari telephone auto-detection', () => {
+  const pages = [
+    ['index.html', indexHtml],
+    ['projects.html', html],
+    ['about.html', aboutHtml],
+    ['awards.html', awardsHtml],
+    ['gallery.html', galleryHtml],
+  ];
+
+  for (const [filename, pageHtml] of pages) {
+    const head = /<head>(?<content>[\s\S]*?)<\/head>/.exec(pageHtml)?.groups.content;
+
+    assert.ok(head, `${filename} has a head element`);
+    assert.match(head, /<meta\s+name="format-detection"\s+content="telephone=no">/);
+  }
+});
 
 test('project expander headers include collapsed author text', () => {
   const headers = extractProjectHeaderAreas(html);
