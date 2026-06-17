@@ -1,15 +1,14 @@
-// Fade header background in as user scrolls (runs once, persistent across SPA navigation)
+// Add a subtle header shadow once content starts scrolling underneath.
 (function () {
   const header = document.getElementById('header');
   if (!header) return;
-  const minOpacity = 0.4;
-  const maxScroll = 120;
-  function updateHeader() {
-    const opacity = minOpacity + Math.min(window.scrollY / maxScroll, 1) * (0.99 - minOpacity);
-    header.style.background = `rgba(251, 246, 239, ${opacity})`;
+
+  function updateHeaderShadow() {
+    header.classList.toggle('scrolled', window.scrollY > 4);
   }
-  window.addEventListener('scroll', updateHeader, { passive: true });
-  updateHeader();
+
+  window.addEventListener('scroll', updateHeaderShadow, { passive: true });
+  updateHeaderShadow();
 })();
 
 // Expander toggle — event delegation so it works after SPA content swap without re-init

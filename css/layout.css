@@ -67,14 +67,47 @@ h2 {
 .header {
   width: 100%;
   max-width: var(--site-max-width);
-  background: rgba(251, 246, 239, 0);
+  background: transparent;
+  box-shadow: none;
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
-  transition: background .3s;
+  transition: box-shadow .25s ease;
   /*border-bottom: 2px solid rgba(0, 0, 0, 0.1);*/
+}
+
+.header.scrolled {
+  box-shadow: 0 8px 20px rgba(80, 63, 43, 0.08);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #FBF6EF;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/resources/Textures/olga-thelavart-vS3idIiYxX0-unsplash.jpg');
+  background-repeat: repeat;
+  background-size: 300px;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.header > * {
+  position: relative;
+  z-index: 2;
 }
 
 .header > .container {
@@ -1385,7 +1418,7 @@ th {
 
   /* Mobile: semi-transparent header */
   .header {
-    background: rgba(251, 246, 239, 0.85) !important;
+    background: transparent;
   }
 
   /* Hide header separator line on mobile */
