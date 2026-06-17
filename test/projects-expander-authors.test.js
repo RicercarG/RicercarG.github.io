@@ -21,7 +21,9 @@ function extractProjectBlockByTitle(title) {
 
   assert.notEqual(titleIndex, -1);
 
-  const projectBlockStart = html.lastIndexOf('<div class="expander">', titleIndex);
+  const standardProjectStart = html.lastIndexOf('<div class="expander">', titleIndex);
+  const nyuProjectStart = html.lastIndexOf('<div class="expander nyu">', titleIndex);
+  const projectBlockStart = Math.max(standardProjectStart, nyuProjectStart);
   const nextProjectStart = html.indexOf('\n\n        <div class="expander', projectBlockStart + 1);
   const projectBlockEnd = nextProjectStart === -1 ? html.length : nextProjectStart;
   return html.slice(projectBlockStart, projectBlockEnd);
@@ -50,8 +52,37 @@ test('new CVPR 2026 flow diffusion project includes metadata and links', () => {
   assert.match(projectBlock, /<a href="https:\/\/whongyi\.github\.io\/">Hongyi Wen<\/a>/);
   assert.match(projectBlock, /<span class="expander-badge cvf">cvpr2026<\/span>/);
   assert.match(projectBlock, /<span class="expander-badge">2025\/09-2026\/04<\/span>/);
+  assert.match(projectBlock, /<p><i>In Proceedings of The IEEE\/CVF Conference on Computer Vision and Pattern Recognition 2026<\/i><\/p>/);
+  assert.match(projectBlock, /<p><strong>TL;DR:<\/strong> Derives an oracle flow-matching velocity that exposes early navigation for layout and generalization, then later refinement for detail and memorization\.<\/p>/);
+  assert.doesNotMatch(projectBlock, /Accepted by CVPR 2026/);
   assert.match(projectBlock, /<a href="https:\/\/maps-research\.github\.io\/from-navigation-to-refinement\/" class="pill projectpage">Project Page<\/a>/);
   assert.match(projectBlock, /<a href="http:\/\/arxiv\.org\/abs\/2512\.02826" class="pill paper">Paper<\/a>/);
+});
+
+test('academic projects through GEMRec include expanded TLDR metadata', () => {
+  const expectedSummaries = [
+    [
+      'From Navigation to Refinement: Revealing the Two-Stage Nature of Flow-based Diffusion Models through Oracle Velocity',
+      'Derives an oracle flow-matching velocity that exposes early navigation for layout and generalization, then later refinement for detail and memorization.',
+    ],
+    [
+      'ImageGem: In-the-wild Generative Image Interaction Dataset for Generative Model Personalization',
+      'Introduces a large-scale real-world interaction dataset for learning fine-grained user preferences in image generation, retrieval, recommendation, and LoRA personalization.',
+    ],
+    [
+      'Diffusion Cocktail: Fused Generation from Diffusion Models',
+      'Mixes content and style signals across domain-specific diffusion models without training, enabling controllable generations unavailable from a single checkpoint.',
+    ],
+    [
+      'GEMRec: Towards Generative Model Recommendation',
+      'Frames generative model recommendation as personalized prompt-model retrieval and generated item ranking, supported by the GEMRec-18K interaction dataset.',
+    ],
+  ];
+
+  for (const [title, summary] of expectedSummaries) {
+    const projectBlock = extractProjectBlockByTitle(title);
+    assert.match(projectBlock, new RegExp(`<p><strong>TL;DR:<\\/strong> ${summary.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}<\\/p>`));
+  }
 });
 
 test('new CVPR 2026 flow diffusion project uses a two-figure layout', () => {
@@ -76,6 +107,32 @@ test('new CVPR 2026 flow diffusion project uses a two-figure layout', () => {
   assert.ok(existsSync(modelPredictionPath));
 });
 
+test('project images open a minimal blurred image preview', () => {
+  const expanderImageRule = /^\.expander-image\s*{(?<body>[^}]*)}/m.exec(css);
+  const previewOverlayRule = /^\.project-image-preview-overlay\s*{(?<body>[^}]*)}/m.exec(css);
+  const previewBackdropRule = /^\.project-image-preview-overlay::before\s*{(?<body>[^}]*)}/m.exec(css);
+  const previewImgRule = /^\.project-image-preview-img\s*{(?<body>[^}]*)}/m.exec(css);
+
+  assert.ok(expanderImageRule);
+  assert.ok(previewOverlayRule);
+  assert.ok(previewBackdropRule);
+  assert.ok(previewImgRule);
+  assert.match(expanderImageRule.groups.body, /cursor:\s*zoom-in/);
+  assert.match(previewOverlayRule.groups.body, /position:\s*fixed/);
+  assert.match(previewOverlayRule.groups.body, /backdrop-filter:\s*blur\(20px\)/);
+  assert.match(previewBackdropRule.groups.body, /background-image:\s*var\(--project-preview-bg\)/);
+  assert.match(previewBackdropRule.groups.body, /filter:\s*blur\(28px\)/);
+  assert.match(previewImgRule.groups.body, /object-fit:\s*contain/);
+  assert.match(script, /function initProjectImagePreview\(\)/);
+  assert.match(script, /e\.target\.closest\('img\.expander-image'\)/);
+  assert.doesNotMatch(script, /if \(projectImages\.length === 0\) return/);
+  assert.match(script, /className\s*=\s*'project-image-preview-overlay'/);
+  assert.match(script, /class="project-image-preview-img"/);
+  assert.match(script, /--project-preview-bg/);
+  assert.match(script, /window\.initPageScripts\s*=\s*function\s*\(page\)\s*{[\s\S]*initProjectImagePreview\(\);/);
+  assert.doesNotMatch(script, /if \(page === 'projects\.html'\) initProjectImagePreview\(\)/);
+});
+
 test('ImageGem expanded layout matches two-column research project pattern', () => {
   const imageGemBlock = extractProjectBlockByTitle('ImageGem: In-the-wild Generative Image Interaction Dataset for Generative Model Personalization');
   const imageColumnIndex = imageGemBlock.indexOf('<div class="column">\n                <img class="expander-image"');
@@ -86,6 +143,84 @@ test('ImageGem expanded layout matches two-column research project pattern', () 
   assert.ok(imageColumnIndex < metadataColumnIndex);
   assert.match(imageGemBlock, /<div class="column durf">[\s\S]*<div class="info">/);
   assert.match(imageGemBlock, /<div class="column durf">[\s\S]*<div class="case">/);
+});
+
+test('non-academic project descriptions use normal paragraph text', () => {
+  const verseBlock = extractProjectBlockByTitle('The Verse NO.1555 - Virtual Campus');
+  const arAudioBlock = extractProjectBlockByTitle('AR Audio Reactive Visual Effect for Auditorium Performance in Realtime');
+
+  assert.match(verseBlock, /<p><strong>TL;DR:<\/strong> A project of making a virtual NYU Shanghai century avenue campus, as part of NYU Shanghai 10th anniversary celebration<\/p>/);
+  assert.doesNotMatch(verseBlock, /<p><em>A project of making/);
+  assert.match(arAudioBlock, /<p><strong>TL;DR:<\/strong> A summer project funded by Dean's Undergraduate Research Fund \(<a href="https:\/\/shanghai\.nyu\.edu\/academics\/undergraduate-research" target="_blank">DURF<\/a>\)<\/p>/);
+  assert.doesNotMatch(arAudioBlock, /<p><em>A summer project funded/);
+  assert.doesNotMatch(verseBlock, /<a[^>]*><em>\[NYU Shanghai News\]/);
+  assert.match(arAudioBlock, /<p><i>Awarded as <a href="https:\/\/shanghai\.nyu\.edu\/content\/undergraduate-research-symposium-and-conferences" target="_blank">Fall 2022 Undergraduate Research Symposium Best Presentation in STEM &amp; Media<\/a><\/i><\/p>/);
+});
+
+test('course projects include TLDR descriptions', () => {
+  const expectedDescriptions = [
+    [
+      'Deep Learning - Final Competition',
+      /<p><strong>TL;DR:<\/strong> Predicts future segmentation masks from video by combining U-Net pseudo-labels with a SimVP-style world model, ranking 2nd on the course leaderboard\.<\/p>/,
+    ],
+    [
+      'Computer Vision - Applying ViT in Generalized Few-shot Semantic Segmentation',
+      /<p><strong>TL;DR:<\/strong> Applied Vision Transformers to generalized few-shot semantic segmentation for adapting segmentation models to novel visual categories\.<\/p>/,
+    ],
+    [
+      'Database - Air Ticket Reservation System',
+      /<p><strong>TL;DR:<\/strong> Built a database-backed air ticket reservation system covering flight search, booking, ticket management, and user workflows\.<\/p>/,
+    ],
+    [
+      'Machine Learning - Fine-Tuning a Diffusion Model For Doodles Generation',
+      /<p><strong>TL;DR:<\/strong> Fine-tuned a diffusion model to generate doodle-style images from prompts and explore lightweight personalization for visual generation\.<\/p>/,
+    ],
+    [
+      'Introduction to Computer Science and Data Science - GameWiz, an Online Multiplayer Quiz Game',
+      /<p><strong>TL;DR:<\/strong>  A socket-based desktop Multiplayer quiz game\.<\/p>/,
+    ],
+  ];
+
+  for (const [title, descriptionPattern] of expectedDescriptions) {
+    const projectBlock = extractProjectBlockByTitle(title);
+    const tldrParagraph = /<p><strong>TL;DR:<\/strong>[^]*?<\/p>/.exec(projectBlock)?.[0];
+
+    assert.match(projectBlock, descriptionPattern);
+    assert.ok(tldrParagraph);
+    assert.doesNotMatch(tldrParagraph, /<a href=/);
+  }
+});
+
+test('course project metadata uses italic course lines without bracket labels', () => {
+  const expectedCourseLines = [
+    [
+      'Deep Learning - Final Competition',
+      /<p><i>Course project for CSCI-GA 2572 Deep Learning, 2024 Spring<\/i><\/p>/,
+    ],
+    [
+      'Computer Vision - Applying ViT in Generalized Few-shot Semantic Segmentation',
+      /<p><i>Course project for CSCI-GA 2271 Computer Vision, 2023 Fall<\/i><\/p>/,
+    ],
+    [
+      'Database - Air Ticket Reservation System',
+      /<p><i>Course project for CSCI-SHU 213 Database Systems, 2023 Spring<\/i><\/p>/,
+    ],
+    [
+      'Machine Learning - Fine-Tuning a Diffusion Model For Doodles Generation',
+      /<p><i>Course project for CSCI-SHU 360 Machine Learning, <a href="https:\/\/sites\.google\.com\/view\/ml360-final-projects\/2023-spring\?authuser=0">2023 Spring<\/a><\/i><\/p>/,
+    ],
+    [
+      'Introduction to Computer Science and Data Science - GameWiz, an Online Multiplayer Quiz Game',
+      /<p><i>Course project for CSCI-SHU 101 Introduction to Computer Science and Data Science<\/i><\/p>/,
+    ],
+  ];
+
+  for (const [title, courseLinePattern] of expectedCourseLines) {
+    const projectBlock = extractProjectBlockByTitle(title);
+
+    assert.match(projectBlock, courseLinePattern);
+    assert.doesNotMatch(projectBlock, /\[course\]/);
+  }
 });
 
 test('collapsed author text links to author pages when available', () => {

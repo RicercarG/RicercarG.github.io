@@ -380,10 +380,77 @@ function initExternalLinks() {
   });
 }
 
+let _projectPreviewClickHandler = null;
+let _projectPreviewKeyHandler = null;
+let _projectPreviewScrollY = 0;
+
+function initProjectImagePreview() {
+  if (_projectPreviewClickHandler) {
+    document.removeEventListener('click', _projectPreviewClickHandler);
+    _projectPreviewClickHandler = null;
+  }
+  if (_projectPreviewKeyHandler) {
+    document.removeEventListener('keydown', _projectPreviewKeyHandler);
+    _projectPreviewKeyHandler = null;
+  }
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  document.querySelector('.project-image-preview-overlay')?.remove();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'project-image-preview-overlay';
+  overlay.innerHTML = '<img class="project-image-preview-img" src="" alt="">';
+  document.body.appendChild(overlay);
+
+  const previewImg = overlay.querySelector('.project-image-preview-img');
+
+  function closePreview() {
+    overlay.classList.remove('open');
+    previewImg.src = '';
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, _projectPreviewScrollY);
+  }
+
+  function openPreview(img) {
+    const src = img.currentSrc || img.src;
+    previewImg.src = src;
+    previewImg.alt = img.alt || '';
+    overlay.style.setProperty('--project-preview-bg', `url("${src}")`);
+    overlay.classList.add('open');
+    _projectPreviewScrollY = window.scrollY;
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${_projectPreviewScrollY}px`;
+    document.body.style.width = '100%';
+  }
+
+  _projectPreviewClickHandler = function (e) {
+    const img = e.target.closest('img.expander-image');
+    if (!img) return;
+    e.preventDefault();
+    openPreview(img);
+  };
+
+  _projectPreviewKeyHandler = function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closePreview();
+  };
+
+  document.addEventListener('click', _projectPreviewClickHandler);
+  document.addEventListener('keydown', _projectPreviewKeyHandler);
+  overlay.addEventListener('click', closePreview);
+  previewImg.addEventListener('click', e => e.stopPropagation());
+}
+
 // Called by router after every SPA navigation, and once on initial load
 window.initPageScripts = function (page) {
   if (page === 'index.html') initStickers();
   if (page === 'gallery.html') initGallery();
+  initProjectImagePreview();
   initExternalLinks();
 };
 

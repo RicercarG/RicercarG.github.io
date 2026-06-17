@@ -652,9 +652,50 @@ th {
   position: relative;
   background: snow;
   border-radius: 10px;
+  cursor: zoom-in;
   /*box-shadow: 0 2px 15px rgba(52,52,52,0.2);*/
   /*border: 2px solid rgba(52, 52, 52, 0.2);*/
   margin-bottom: 30px;
+}
+
+.project-image-preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: rgba(251, 246, 239, 0.72);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  cursor: zoom-out;
+}
+
+.project-image-preview-overlay.open {
+  display: flex;
+}
+
+.project-image-preview-overlay::before {
+  content: '';
+  position: absolute;
+  inset: -32px;
+  background-image: var(--project-preview-bg);
+  background-position: center;
+  background-size: cover;
+  filter: blur(28px);
+  opacity: 0.38;
+  transform: scale(1.06);
+}
+
+.project-image-preview-img {
+  position: relative;
+  z-index: 1;
+  max-width: 94vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
 }
 
 .expander .case {
