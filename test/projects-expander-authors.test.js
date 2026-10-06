@@ -57,7 +57,7 @@ test('header does not add a scroll shadow', () => {
 test('project expander headers include collapsed author text', () => {
   const headers = extractProjectHeaderAreas(html);
 
-  assert.equal(headers.length, 11);
+  assert.equal(headers.length, 12);
   for (const header of headers) {
     assert.match(header, /class="expander-authors"/);
   }
