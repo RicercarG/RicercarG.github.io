@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'awards.html': 'Awards',
     'gallery.html': 'Gallery',
   };
-  const PAGE_ORDER = ['index.html', 'about.html', 'projects.html', 'awards.html', 'gallery.html'];
+  const PAGE_ORDER = ['index.html', 'about.html', 'projects.html', 'gallery.html'];
 
   function normalizePage(path) {
     let p = (path || '').split('/').pop() || '';

@@ -475,6 +475,18 @@ table a {
   text-decoration: underline;
 }
 
+#about table {
+  table-layout: fixed;
+}
+
+#about table th:first-child {
+  width: 30%;
+}
+
+#about table th:last-child {
+  width: 22%;
+}
+
 th, td {
   /*padding: 8px;*/
   padding: 15px 8px;
